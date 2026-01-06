@@ -11,7 +11,7 @@ from shunollo_core.learning.synaptic_plasticity import train_neural_intuition, q
 from shunollo_core.memory.base import AbstractMemory
 
 # We need to patch the memory used by synaptic_plasticity because it expects imports that might not work cleanly 
-# or we just rely on standard behavior. actually train_neural_intuition imports get_brain locally. It does NOT import Omnisthesia.
+# or we just rely on standard behavior. train_neural_intuition imports get_brain locally.
 # So this should be safe.
 
 class TestNeuroSymbolic:
