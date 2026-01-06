@@ -1,39 +1,35 @@
-# WHITEPAPER: Lagrangian Efficiency (The Principle of Least Action)
-## Applying Classical Mechanics to Network Flow Integrity
+# Lagrangian Efficiency
+## Applying Classical Mechanics to Data Flow Integrity
 
 ### Abstract
-Nature follows the path of least resistance. In classical mechanics, this is formalized as the **Principle of Least Action**. Shunollo’s Isomorphic Architecture applies this universal law to cybersecurity. By defining the **Network Lagrangian** ($L$), we can mathematically identify "Strained" states—such as encrypted tunneling or routing loops—that force the system to violate the path of least action.
+Nature follows the path of least resistance. In classical mechanics, this is formalized as the **Principle of Least Action**. Shunollo's Isomorphic Architecture applies this universal law to anomaly detection. By defining the **System Lagrangian** ($L$), we can mathematically identify "Strained" states—such as encrypted tunneling or processing loops—that force the system to violate the path of least action.
 
----
-
-### 1. The Mechanical Isomorphism: Classical Action $S$
-In classical mechanics, the path taken by a system between two states is the one that minimizes the **Action** ($S$):
+### 1. The Principle of Least Action
+The **Action** ($S$) of any system is defined as:
 
 $$S = \int_{t_1}^{t_2} L \, dt$$
 
-Where $L$ is the Lagrangian ($L = T - V$). We map this directly to network flows:
-- **Kinetic Energy ($T$)**: → **Throughput (Work being done)**
-- **Potential Energy ($V$)**: → **Latency (Resistance/Storage)**
+Where $L$ is the Lagrangian ($L = T - V$). We map this directly to data flows:
+- **$T$ (Kinetic Energy)**: Throughput (Data/Time).
+- **$V$ (Potential Energy)**: Latency (Queued/Blocked data).
 
-### 2. The Network Lagrangian ($L$)
-A healthy network flow exists in a state of high efficiency. It moves data from Server A to Client B with the minimal necessary energy cost. We define the **Network Lagrangian** as:
+### 2. The System Lagrangian ($L$)
+A healthy data flow exists in a state of high efficiency. It moves data from Source to Destination with the minimal necessary energy cost. We define the **System Lagrangian** as:
 
-$$L = \text{Throughput} - \text{Latency}$$
+$$L = \log(\text{Throughput}) - \log(\text{Latency})$$
 
-- **The Healthy State**: High Throughput, Low Latency. The system follows the **Path of Least Action**.
-- **The Strained State**: Low Throughput, High Latency OR High Throughput with High Latency (Systemic Tension). 
+- A **Positive Lagrangian** indicates the system is "gaining ground" (High efficiency).
+- A **Negative Lagrangian** indicates the system is "Strained" (Processing overhead dominates throughput).
 
-### 3. Lagrangian Strain ($\mathcal{L}_s$)
-We calculate the **Lagrangian Strain** as the violation of the Least Action principle. In an attack scenario (e.g., **Encrypted Tunneling**), the data flow is forced to take a convoluted path or perform cryptographic work that spikes latency without a proportional increase in kinetic throughput.
+### 3. The Action Integral (Lagrangian Strain)
+We calculate the **Lagrangian Strain** as the violation of the Least Action principle. In an anomalous scenario, the data flow is forced to take a convoluted path or perform unexpected work that spikes latency without a proportional increase in throughput.
 
-**Detection Thresholds**:
-- **$L \approx 1.0$**: **LEAST_ACTION** (Optimal Flow).
-- **$L < 0.3$**: **LAGRANGIAN_STRAIN** (Systemic Inefficiency). 
+$$\text{Strain} = \int_{\text{Anomaly Window}} |L| \, dt$$
 
-This allows Shunollo to detect "Invisible" attacks. A hacker may not spike your bandwidth (Kinetic), but their presence *must* spike the system's Action potential (Tension). 
+This allows Shunollo to detect "Invisible" anomalies. A hidden process may not spike your bandwidth (Kinetic), but its presence *must* spike the system's Action potential (Tension).
 
-### 4. Conclusion
-By monitoring the **Hamiltonian** of the network, Shunollo identifies threats that are logically sound but physically impossible. We don't just secure the data; we secure the efficiency of the universe.
+### Conclusion
+By monitoring the **Hamiltonian** of the system, Shunollo identifies processes that are logically sound but physically inefficient. We don't just monitor data; we monitor the efficiency of the universe.
 
 ---
-*Authored by the Shunollo Theoretical Physics Group*
+*© Shunollo Labs | Inspired by William Rowan Hamilton*

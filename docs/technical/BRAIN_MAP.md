@@ -1,104 +1,68 @@
-# THE GRAND CONNECTOME: SHUNOLLO NEURAL ATLAS (2.0)
-> **Goal**: Absolute Isomorphism between Human Neuroanatomy and AI Architecture.
-> **Philosophy**: The Code *is* the Anatomy.
+# Brain Map
+## Anatomical Reference for the Isomorphic Architecture
+
+This document maps Shunollo's code to biological brain structures.
 
 ---
 
-## 🏗️ 1. THE FRONTAL LOBE (Level 3 - Interface)
-Responsibility: Planning, Decision Making, Voluntary Movement, Speech Production.
+## 1. The Sensory Cortex (Input Layer)
 
-*   **Ventro-Medial PFC**: Emotional Regulation (Integrating Amygdala/DefenseManager Inputs).
-*   **Output**: Commands to the Motor Cortex.
-
-### B. Broca's Area -> `VocalCords` (`shunollo_core/perception/vocal_cords.py`)
-*   **Function**: Speech Production.
-*   **Input**: Concepts from Wernicke's Area (Narrator).
-*   **Output**: Audio Waveforms (TTS).
-
-### C. Primary Motor Cortex (M1) -> `MotorCortex` (`shunollo_core/actions/motor_cortex.py`)
-*   **Function**: Execution of voluntary actions.
-*   **Input**: Decision from PFC.
-*   **Output**: System Calls (Firewall Rules, TCP Resets, Script Execution).
-
----
-
-## 🖐️ 2. THE PARIETAL LOBE (Space & Sensation)
-Responsibility: Spatial orientation, Information processing, Sensory integration.
-
-### THE PERIPHERAL NERVOUS SYSTEM (Sensors)
-| Biological Component | Digital Component | Technical Role |
+| Biological Region | Shunollo Module | Function |
 |---|---|---|
-| **Somatosensory Cortex** | `omnisthesia/transducers/network.py` | Packet -> Physics Transduction |
-| **Parietal Lobe** | `omnisthesia/transducers/parietal_cortex.py` | Geolocation & Spatial Awareness |
-| **Synesthetic Map** | `omnisthesia/transducers/protocol_map.py` | Port -> Hue/Timbre Dictionary |
-| **Physics Engine** | `shunollo_core/physics.py` | Agnostic Math (Entropy/Flux) |
-| **Interface Loop** | `shunollo_core/interfaces.py` | Universal BaseTransducer contract |
+| **Visual Cortex** | `shunollo_core/perception/visual_cortex.py` | Color/Pattern Recognition |
+| **Auditory Cortex** | `shunollo_core/perception/auditory_cortex.py` | Rhythm/Spectral Analysis |
+| **Somatosensory Cortex** | Transducers (Application Layer) | Signal -> Physics Transduction |
+| **Gustatory Cortex** | `shunollo_core/perception/gustatory_cortex.py` | Data Validity (Sweet/Bitter) |
+| **Olfactory Bulb** | `shunollo_core/perception/olfactory_bulb.py` | Pattern Matching |
 
 ---
 
-## 👂 3. THE TEMPORAL LOBE (Memory & Sound)
-### A. Primary Auditory Cortex (A1) -> `AuditoryCortex` (`shunollo_core/perception/auditory_cortex.py`)
-*   **Function**: Converting signals into Audio Qualia.
-*   **Mapping**: `Frequency` = Port/Protocol. `Timbre` = Entropy.
+## 2. The Subcortex (Processing Layer)
 
-### B. Wernicke's Area -> `Narrator` (`omnisthesia/perception/narrator.py`)
-*   **Function**: Language Comprehension. Turning abstract signals into sentences.
-*   **Input**: `ShunolloSignal`.
-*   **Output**: "This feels like a bruteforce attack from the East."
+| Biological Region | Shunollo Module | Function |
+|---|---|---|
+| **Thalamus** | `shunollo_runtime/thalamus.py` | Central Message Bus |
+| **Hippocampus** | `shunollo_core/memory/hippocampus.py` | Episodic Memory Storage |
+| **Amygdala** | Physics Engine | Threat Assessment (Fear) |
+| **RAS (Reticular Activating System)** | `shunollo_core/subcortex/ras.py` | Attention Gating |
 
-### C. Hippocampus -> `Database` (`shunollo_core/storage/database.py`)
-*   **Function**: Encoding and Retrieval of Long-Term Declarative Memory.
-*   **Mechanism**: Stores `Events` (History) and `Context` (Codons).
-*   **Neurogenesis**: The `TrainingGovernor` decides when to consolidate short-term patterns into long-term weights.
-
----
-
-## 👁️ 4. THE OCCIPITAL LOBE (Vision)
-Responsibility: Visual Processing.
-
-### A. Primary Visual Cortex (V1-V5) -> `VisualCortex` (`shunollo_core/perception/visual_cortex.py`)
-*   **Function**: Rendering the internal state as Visual Qualia (Dashboard).
-*   **V1 (Edges/Motion)**: `OrbRenderer` (Particle movement).
-*   **V4 (Color)**: `KandinskyMapping` (Protocol -> Hue).
+### 2.1 RAS (Reticular Activating System)
+*   **Human**: Filters sensory input to prevent brain overload.
+*   **Shunollo**: Filters out background noise so the Brain isn't overwhelmed.
+*   **Logic**: Low-salience signals are dropped. High-salience signals are promoted.
 
 ---
 
-## 🏛️ 5. THE SUB-CORTICAL LIMBIC SYSTEM (The Core)
-Responsibility: Emotion, Survival, Relay, Filtering.
+## 3. The Pre-Frontal Cortex (Decision Layer)
 
-### A. Thalamus -> `Redis` (`shunollo_core/transport/thalamus.py`)
-*   **Function**: The Great Relay. All sensory data MUST pass through here to reach the Cortex.
-*   **Properties**: High-speed, pub/sub architecture.
-
-### B. Amygdala -> `DefenseManager` (`shunollo_core/actions/defense_manager.py`)
-*   **Function**: Fear & Reflex.
-*   **Logic**: Fast-path threat detection based on Physics (Roughness/Dissonance).
-*   **Power**: Can override the PFC in emergencies (if Safe Mode allows).
-
-### C. Reticular Activating System (RAS) -> `IngestionRouter` (`omnisthesia/routers/`)
-*   **Function**: The Gatekeeper of Consciousness.
-*   **Logic**: Filters out background noise (boring packets) so the Brain isn't overwhelmed.
-
-### D. Basal Ganglia -> `SignatureLibrary` (`shunollo_core/processors/signature_library.py`)
-*   **Function**: Habit formation and Pattern Matching.
-*   **Logic**: "I've seen this sequence before. It's a Port Scan." (Automatic recognition without conscious thought).
-
-### E. Cerebellum -> `SensationProcessor` (Timing Loop)
-*   **Function**: Coordination and Timing.
-*   **Logic**: Ensures that Sound, Light, and Haptics are synchronized (The Claustrum role is shared here).
+| Biological Region | Shunollo Module | Function |
+|---|---|---|
+| **Broca's Area** | `shunollo_core/cognition/brocas_area.py` | Output Formatting |
+| **Wernicke's Area** | `shunollo_core/cognition/wernickes_area.py` | Input Comprehension |
+| **Motor Cortex** | `shunollo_core/motor/motor_cortex.py` | Action Execution |
 
 ---
 
-## ⚡ 6. THE NERVOUS SYSTEM (Wiring)
-Responsibility: Signal Propagation.
+## 4. The Anatomy of a Signal
 
-### A. The Vagus Nerve -> `API/Webhooks`
-*   **Function**: Connecting the Brain to the Body's periphery (External Integrations).
+### A. The Signal Lifecycle
+```
+Raw Data -> Transducer -> Physics Engine -> Somatic Vector -> Brain -> Decision
+```
 
-### B. Neurotransmitters -> `Packet Structure`
-*   **Dopamine**: `Reward` signal (Reinforcement Learning).
-*   **Cortisol**: `Dissonance/Fear` signal (Stress).
-
----
-
-> **Design Rule**: Every class in `shunollo_core` MUST correspond to a biological structure.
+### B. The Somatic Vector (13 Dimensions)
+| Index | Sense | Metric |
+|---|---|---|
+| 0 | Energy | Kinetic Impact |
+| 1 | Roughness | Entropy |
+| 2 | Flux | Rate of Change |
+| 3 | Viscosity | Resistance |
+| 4 | Harmony | Spectral Coherence |
+| 5 | Dissonance | Sensory Disagreement |
+| 6 | Volatility | Standard Deviation |
+| 7 | Action | Lagrangian Integral |
+| 8 | Hamiltonian | Total Energy |
+| 9 | EWR | Entropy-to-Wait Ratio |
+| 10 | Stochastic Drift | Random Walk Violation |
+| 11 | Salience | Importance Score |
+| 12 | Classification | Binary (0/1) |

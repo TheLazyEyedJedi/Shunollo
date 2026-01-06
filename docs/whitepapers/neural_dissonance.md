@@ -1,22 +1,31 @@
-# WHITEPAPER: Cognitive Integrity & Neural Dissonance
-## Solving the Turing Test for Machine Intelligence Security
+# Neural Dissonance
+**Subject**: The Physics of "Gut Feeling"
 
-### The Problem: Logical Fallacies in AI
-Deep Learning models are prone to hallucinations and "Hasty Generalizations"—calling something a threat just because it looks slightly unusual based on a small sample size. This leads to False Positive storms.
+## The Problem: Multi-Modal Integration
+How does the brain combine 8+ senses into a single "feeling" of danger?
 
-### Methodology: Cognitive Fallacy Checks
-Shunollo includes a "Pre-Frontal Cortex" layer that validates detection logic against classical logical fallacies:
+**Answer**: Dissonance.
 
-1.  **False Cause (Coincidence Test)**: Ensures that two simultaneous events aren't just a coincidence.
-2.  **Hasty Generalization**: Requires a specific "Physics Confidence" threshold (3-sigma) before escalating.
-3.  **Base Rate Fallacy**: Accounts for the fact that most traffic is safe, preventing over-sensitivity in low-noise environments.
+## The Dissonance Score
+Shunollo computes a **Dissonance Score** by measuring the *disagreement* between sensory channels:
 
-### The Turing Audit Results
-In the **Logic Validation Suite**, we subjected the Parietal Cortex to "Mind Games" designed to trick a simple agent.
-*   **Result**: The system correctly identified that high frequency *without* entropy change is likely a backup (Neural Harmony), whereas low frequency *with* high entropy is an exfiltration attempt (Neural Dissonance).
+$$D = \sigma(\text{SensoryVector})$$
 
-### Summary
-By encoding formal logic and fallacy-checking into the detection pipeline, Shunollo achieves a **99.9% Signal-to-Noise ratio**, outperforming "Black Box" AI systems that lack transparency in their decision-making.
+Where $\sigma$ is the standard deviation across the 13-dimensional somatic vector.
+
+### Interpretation
+1.  **Low Dissonance ($D \approx 0$)**: All senses agree. The signal is coherent. Either "all normal" or "all anomalous."
+2.  **High Dissonance ($D > 0.3$)**: Senses disagree. Something is *inconsistent*. This is a "Gut Feeling" of wrongness.
+3.  **Base Rate Awareness**: Accounts for the fact that most data is benign, preventing over-sensitivity in low-noise environments.
+
+## The Bayesian Referee
+The Dissonance Score is fed to the **Pre-Frontal Cortex** (the Agent), which uses it as a prior for decision-making.
+
+*   High Dissonance + One Anomalous Sense → Investigate.
+*   Low Dissonance + All Normal → Ignore.
+
+## Conclusion
+Shunollo's "Gut Feeling" is mathematically grounded in the physics of sensory disagreement. It's not magic—it's variance.
 
 ---
-*Technical Specification v2.1*
+*© Shunollo Labs*

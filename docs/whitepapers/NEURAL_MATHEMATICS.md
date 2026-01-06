@@ -21,7 +21,7 @@ Shunollo maximizes efficiency by using a **Hybrid Architecture**:
 ### 1.1 Visual Data Flow
 ```mermaid
 graph TD
-    A[Raw Packet] -->|Transducer| B(Physics Engine)
+    A[Raw Signal] -->|Transducer| B(Physics Engine)
     B -->|13-dim Vector| C{Distributor}
     
     subgraph The Brain
@@ -46,15 +46,15 @@ graph TD
 **Video**: [Gradient descent, how neural networks learn](https://www.youtube.com/watch?v=IHZwWFHWa-w)
 
 Shunollo uses **Online Hebbian-Like Learning**.
-Instead of massive offline Backpropagation passes (like GPT), we use:
+Instead of massive offline Backpropagation passes, we use:
 1.  **Ridge Regression (Readout)**: The Reservoir's output weights are updated using simple least-squares recurrence.
 2.  **Reconstruction Minimization (Imagination)**: The Autoencoder minimizes Mean Squared Error ($MSE$) on the fly using small-batch SGD.
 
 ### The Cost Function: $C(w)$
 $$Cost = \alpha \cdot (ClassError) + \beta \cdot (ReconstructionError)$$
 
-*   **Class Error**: Did I mistype this packet?
-*   **Reconstruction Error**: Did I fail to imagine this packet?
+*   **Class Error**: Did I misclassify this signal?
+*   **Reconstruction Error**: Did I fail to imagine this signal?
 
 ---
 
@@ -65,7 +65,7 @@ Standard Backprop is computationally expensive ($O(N^2)$).
 Shunollo avoids generic Backprop through time by using the **Echo State Property**:
 *   The internal Reservoir weights ($W$) are **Fixed** and **Random**.
 *   Only the Output weights ($W_{out}$) are trained.
-*   This makes learning linear and extremely fast suitable for real-time packet switching.
+*   This makes learning linear and extremely fast—suitable for real-time processing.
 
 ---
 
@@ -75,31 +75,29 @@ Shunollo avoids generic Backprop through time by using the **Echo State Property
 Neural networks are engines of calculus (Derivatives). Shunollo uses **Rates of Change** ($\frac{dy}{dx}$), not just static values ($y$).
 
 ### Static vs. Dynamic
-*   **Static (Traditional)**: `if CPU > 90% then ALERT`.
+*   **Static (Traditional)**: `if metric > 90% then ALERT`.
     *   *Flaw*: Triggers on slow, safe ramp-ups.
-*   **Dynamic (Shunollo)**: `if d(CPU)/dt > Threshold then ALERT`.
-    *   *Advantage*: Ignores slow creep, catches sudden spikes (Flash Attacks).
+*   **Dynamic (Shunollo)**: `if d(metric)/dt > Threshold then ALERT`.
+    *   *Advantage*: Ignores slow creep, catches sudden spikes.
 
 **Application**:
 *   **Flux**: The first derivative of volume. $\text{Flux} = \frac{d(\text{Size})}{dt}$.
 *   **Acceleration**: The second derivative. $\text{Accel} = \frac{d(\text{Flux})}{dt}$.
 
-By monitoring derivatives, we detect the *force* of an attack, not just its presence.
-
-By monitoring derivatives, we detect the *force* of an attack, not just its presence.
+By monitoring derivatives, we detect the *force* of a disruption, not just its presence.
 
 ---
 
 ## 5. The Laws of Energy & Plasticity (Updated 2026)
 
 ### 5.1 Kinetic Energy (The Power Law)
-Originally modeled as linear, we now use a **Power Law** to correctly model kinetic impact, favoring Velocity (PPS) over Mass (Bytes):
+Originally modeled as linear, we now use a **Power Law** to correctly model kinetic impact, favoring Velocity (Rate) over Mass (Size):
 $$E = m \cdot v^{1.5}$$
 *   $m$: Normalized Size (Log Scale)
-*   $v$: Normalized Rate (PPS)
+*   $v$: Normalized Rate
 
 ### 5.2 Homeostatic Plasticity (The Energy Budget)
-To prevent "Runaway LTP" (Epileptic Saturation) where every agent trusts everything, we enforce **Normalization**:
+To prevent "Runaway LTP" (Saturation) where every agent trusts everything, we enforce **Normalization**:
 $$\sum W_{agents} \approx 0.5 \cdot N_{agents}$$
 If one synapse strengthens, others must weaken. The brain has a finite energy budget.
 
