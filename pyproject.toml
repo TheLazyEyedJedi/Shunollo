@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "shunollo"
+version = "0.1.0"
+description = "Biomimetic Physics Engine for Cognitive Architectures"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "Apache-2.0"}
+authors = [
+    {name = "Austin", email = "austin@shunollo.org"},
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "numpy>=1.20.0",
+    "scipy>=1.7.0",
+    "fastapi>=0.68.0",
+    "uvicorn>=0.15.0",
+    "sqlalchemy>=1.4.0",
+    "pydantic>=1.8.0",
+    "pillow>=8.0.0",
+    "pyyaml>=5.0",
+]
+
+[project.optional-dependencies]
+runtime = ["redis>=4.0.0"]
+dev = [
+    "pytest>=7.0.0",
+    "black",
+    "ruff",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/TheLazyEyedJedi/Shunollo"
+"Bug Tracker" = "https://github.com/TheLazyEyedJedi/Shunollo/issues"
+"Documentation" = "https://github.com/TheLazyEyedJedi/Shunollo#readme"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["shunollo_core*", "shunollo_runtime*"]

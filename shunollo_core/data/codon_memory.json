@@ -1,0 +1,1048 @@
+{
+  "test_reconstruction_agent": {
+    "bright_loud_fast": {
+      "count": 1,
+      "score_sum": 0.8,
+      "feedback": [
+        {
+          "value": "positive",
+          "time": "2026-01-05T18:03:39.509956+00:00"
+        }
+      ],
+      "weight": 1.05,
+      "last_seen": "2026-01-05T18:03:39.509956+00:00"
+    },
+    "dim_quiet_slow": {
+      "count": 1,
+      "score_sum": 0.8,
+      "feedback": [
+        {
+          "value": "positive",
+          "time": "2026-01-05T18:03:39.509956+00:00"
+        }
+      ],
+      "weight": 1.05,
+      "last_seen": "2026-01-05T18:03:39.509956+00:00"
+    }
+  },
+  "White": {
+    "high_pitch_loud_sine": {
+      "count": 17075,
+      "score_sum": 16211.469000000214,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.764120+00:00"
+    },
+    "cool_dim_slow_pulse": {
+      "count": 1883,
+      "score_sum": 803.0320000000054,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.538816+00:00"
+    },
+    "TCP_large_external": {
+      "count": 366,
+      "score_sum": 292.7999999999985,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:55.450601+00:00"
+    },
+    "SMOOTH_FLOW_STABLE_BEAT_FLUID_DYNAMICS_GAUSSIAN_WALK_LEAST_ACTION_SYSTEMIC_EASE_OPEN_PATH": {
+      "count": 167532,
+      "score_sum": 81901.50199997959,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.764137+00:00"
+    },
+    "TCP_small_external": {
+      "count": 760,
+      "score_sum": 238.41299999999936,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.764134+00:00"
+    },
+    "warm_dim_slow_pulse": {
+      "count": 131476,
+      "score_sum": 46925.469999983274,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.764131+00:00"
+    },
+    "UDP_large_external": {
+      "count": 298,
+      "score_sum": 239.19999999999885,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.538819+00:00"
+    },
+    "UDP_small_external": {
+      "count": 496,
+      "score_sum": 153.60500000000005,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.284348+00:00"
+    },
+    "high_pitch_soft_sine": {
+      "count": 167,
+      "score_sum": 34.54900000000003,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:54.038848+00:00"
+    },
+    "high_pitch_loud_sawtooth": {
+      "count": 9722,
+      "score_sum": 9722.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.877566+00:00"
+    },
+    "warm_bright_slow_pulse": {
+      "count": 34173,
+      "score_sum": 34173.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.877575+00:00"
+    },
+    "UNK_large_internal": {
+      "count": 29080,
+      "score_sum": 29080.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.877577+00:00"
+    },
+    "low_pitch_soft_sine": {
+      "count": 125858,
+      "score_sum": 41590.32799999536,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.913333+00:00"
+    },
+    "UNK_small_internal": {
+      "count": 36398,
+      "score_sum": 12216.294999999476,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.913345+00:00"
+    },
+    "low_pitch_loud_sine": {
+      "count": 14210,
+      "score_sum": 14210.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.811902+00:00"
+    },
+    "IP_small_external": {
+      "count": 81407,
+      "score_sum": 25230.741000015245,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:32:20.631670+00:00"
+    },
+    "IP_large_external": {
+      "count": 12464,
+      "score_sum": 12464.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:32:20.458243+00:00"
+    },
+    "ARP_small_external": {
+      "count": 2531,
+      "score_sum": 766.9999999999919,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:32:13.118801+00:00"
+    },
+    "IPV6_small_external": {
+      "count": 3111,
+      "score_sum": 996.4360000000006,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:32:19.404487+00:00"
+    },
+    "802.1Q_small_external": {
+      "count": 45,
+      "score_sum": 13.856000000000002,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:08:13.481693+00:00"
+    },
+    "IPV6_large_external": {
+      "count": 57,
+      "score_sum": 57.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:30:33.590180+00:00"
+    },
+    "802.1Q_large_external": {
+      "count": 19,
+      "score_sum": 19.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:08:10.403103+00:00"
+    },
+    "high_pitch_soft_sawtooth": {
+      "count": 500,
+      "score_sum": 133.1560000000002,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:37:20.413973+00:00"
+    },
+    "TCP_small_internal": {
+      "count": 500,
+      "score_sum": 133.1560000000002,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:37:20.413985+00:00"
+    }
+  },
+  "Blue": {
+    "high_pitch_loud_sine": {
+      "count": 17075,
+      "score_sum": 15497.300000000336,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.768053+00:00"
+    },
+    "cool_dim_slow_pulse": {
+      "count": 1883,
+      "score_sum": 662.3000000000122,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.544583+00:00"
+    },
+    "TCP_large_external": {
+      "count": 366,
+      "score_sum": 36.60000000000025,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:55.456692+00:00"
+    },
+    "SMOOTH_FLOW_STABLE_BEAT_FLUID_DYNAMICS_GAUSSIAN_WALK_LEAST_ACTION_SYSTEMIC_EASE_OPEN_PATH": {
+      "count": 167532,
+      "score_sum": 45868.499999873144,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.768070+00:00"
+    },
+    "TCP_small_external": {
+      "count": 760,
+      "score_sum": 99.9999999999989,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.768067+00:00"
+    },
+    "warm_dim_slow_pulse": {
+      "count": 131476,
+      "score_sum": 14761.000000032394,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.768064+00:00"
+    },
+    "UDP_large_external": {
+      "count": 298,
+      "score_sum": 29.800000000000153,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.544588+00:00"
+    },
+    "UDP_small_external": {
+      "count": 496,
+      "score_sum": 49.600000000000435,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.289652+00:00"
+    },
+    "high_pitch_soft_sine": {
+      "count": 167,
+      "score_sum": 40.7000000000001,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:54.044222+00:00"
+    },
+    "high_pitch_loud_sawtooth": {
+      "count": 9722,
+      "score_sum": 9722.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.879221+00:00"
+    },
+    "warm_bright_slow_pulse": {
+      "count": 34173,
+      "score_sum": 30445.199999997316,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.879226+00:00"
+    },
+    "UNK_large_internal": {
+      "count": 29080,
+      "score_sum": 19249.30000000001,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.879228+00:00"
+    },
+    "low_pitch_soft_sine": {
+      "count": 125858,
+      "score_sum": 14199.200000030349,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.916071+00:00"
+    },
+    "UNK_small_internal": {
+      "count": 36398,
+      "score_sum": 3639.799999997785,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.916080+00:00"
+    },
+    "low_pitch_loud_sine": {
+      "count": 14210,
+      "score_sum": 5909.3000000006605,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.814828+00:00"
+    },
+    "IP_small_external": {
+      "count": 81407,
+      "score_sum": 9752.30000001419,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:32:20.633902+00:00"
+    },
+    "IP_large_external": {
+      "count": 12464,
+      "score_sum": 11915.900000000192,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:32:20.461333+00:00"
+    },
+    "ARP_small_external": {
+      "count": 2531,
+      "score_sum": 253.0999999999899,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:32:13.120866+00:00"
+    },
+    "IPV6_small_external": {
+      "count": 3111,
+      "score_sum": 311.10000000000224,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:32:19.407167+00:00"
+    },
+    "802.1Q_small_external": {
+      "count": 45,
+      "score_sum": 6.299999999999994,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:08:13.484563+00:00"
+    },
+    "IPV6_large_external": {
+      "count": 57,
+      "score_sum": 5.699999999999996,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:30:33.592401+00:00"
+    },
+    "802.1Q_large_external": {
+      "count": 19,
+      "score_sum": 19.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:08:10.405908+00:00"
+    },
+    "high_pitch_soft_sawtooth": {
+      "count": 500,
+      "score_sum": 500.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:37:20.419492+00:00"
+    },
+    "TCP_small_internal": {
+      "count": 500,
+      "score_sum": 500.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:37:20.419502+00:00"
+    }
+  },
+  "Red": {
+    "high_pitch_loud_sine": {
+      "count": 17075,
+      "score_sum": 3808.3019999998323,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.772473+00:00"
+    },
+    "cool_dim_slow_pulse": {
+      "count": 1883,
+      "score_sum": 1053.584999999991,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.550626+00:00"
+    },
+    "TCP_large_external": {
+      "count": 366,
+      "score_sum": 177.62700000000032,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:55.462056+00:00"
+    },
+    "SMOOTH_FLOW_STABLE_BEAT_FLUID_DYNAMICS_GAUSSIAN_WALK_LEAST_ACTION_SYSTEMIC_EASE_OPEN_PATH": {
+      "count": 167532,
+      "score_sum": 23722.072999997737,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.772508+00:00"
+    },
+    "TCP_small_external": {
+      "count": 760,
+      "score_sum": 311.3830000000001,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.772505+00:00"
+    },
+    "warm_dim_slow_pulse": {
+      "count": 131476,
+      "score_sum": 16049.382999994386,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.772501+00:00"
+    },
+    "UDP_large_external": {
+      "count": 298,
+      "score_sum": 144.57100000000003,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.550633+00:00"
+    },
+    "UDP_small_external": {
+      "count": 496,
+      "score_sum": 206.32299999999992,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.296277+00:00"
+    },
+    "high_pitch_soft_sine": {
+      "count": 167,
+      "score_sum": 51.237,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:54.049824+00:00"
+    },
+    "high_pitch_loud_sawtooth": {
+      "count": 9722,
+      "score_sum": 1911.4319999999188,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.882100+00:00"
+    },
+    "warm_bright_slow_pulse": {
+      "count": 34173,
+      "score_sum": 6619.105000000037,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.882106+00:00"
+    },
+    "UNK_large_internal": {
+      "count": 29080,
+      "score_sum": 5461.261999999907,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.882108+00:00"
+    },
+    "low_pitch_soft_sine": {
+      "count": 125858,
+      "score_sum": 14924.93699999465,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.918127+00:00"
+    },
+    "UNK_small_internal": {
+      "count": 36398,
+      "score_sum": 4936.6950000000215,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.918135+00:00"
+    },
+    "low_pitch_loud_sine": {
+      "count": 14210,
+      "score_sum": 2576.1649999999777,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.816907+00:00"
+    },
+    "IP_small_external": {
+      "count": 81407,
+      "score_sum": 8949.340999999584,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:32:20.636694+00:00"
+    },
+    "IP_large_external": {
+      "count": 12464,
+      "score_sum": 2431.1220000000153,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:32:20.464306+00:00"
+    },
+    "ARP_small_external": {
+      "count": 2531,
+      "score_sum": 260.8000000000086,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:32:13.122580+00:00"
+    },
+    "IPV6_small_external": {
+      "count": 3111,
+      "score_sum": 374.2360000000067,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:32:19.409567+00:00"
+    },
+    "802.1Q_small_external": {
+      "count": 45,
+      "score_sum": 4.856000000000001,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:08:13.486784+00:00"
+    },
+    "IPV6_large_external": {
+      "count": 57,
+      "score_sum": 10.088999999999988,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:30:33.594149+00:00"
+    },
+    "802.1Q_large_external": {
+      "count": 19,
+      "score_sum": 3.7679999999999993,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:08:10.409827+00:00"
+    },
+    "high_pitch_soft_sawtooth": {
+      "count": 500,
+      "score_sum": 449.99999999999625,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:37:20.424863+00:00"
+    },
+    "TCP_small_internal": {
+      "count": 500,
+      "score_sum": 449.99999999999625,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:37:20.424872+00:00"
+    }
+  },
+  "Gray": {
+    "high_pitch_loud_sine": {
+      "count": 17075,
+      "score_sum": 8537.5,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.776384+00:00"
+    },
+    "cool_dim_slow_pulse": {
+      "count": 1883,
+      "score_sum": 941.5,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.557261+00:00"
+    },
+    "TCP_large_external": {
+      "count": 366,
+      "score_sum": 183.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:55.467662+00:00"
+    },
+    "SMOOTH_FLOW_STABLE_BEAT_FLUID_DYNAMICS_GAUSSIAN_WALK_LEAST_ACTION_SYSTEMIC_EASE_OPEN_PATH": {
+      "count": 167532,
+      "score_sum": 83766.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.776401+00:00"
+    },
+    "TCP_small_external": {
+      "count": 760,
+      "score_sum": 380.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.776399+00:00"
+    },
+    "warm_dim_slow_pulse": {
+      "count": 131476,
+      "score_sum": 65738.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.776396+00:00"
+    },
+    "UDP_large_external": {
+      "count": 298,
+      "score_sum": 149.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.557265+00:00"
+    },
+    "UDP_small_external": {
+      "count": 496,
+      "score_sum": 248.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.303571+00:00"
+    },
+    "high_pitch_soft_sine": {
+      "count": 167,
+      "score_sum": 83.5,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:54.055633+00:00"
+    },
+    "high_pitch_loud_sawtooth": {
+      "count": 9722,
+      "score_sum": 4861.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.884193+00:00"
+    },
+    "warm_bright_slow_pulse": {
+      "count": 34173,
+      "score_sum": 17086.5,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.884199+00:00"
+    },
+    "UNK_large_internal": {
+      "count": 29080,
+      "score_sum": 14540.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.884201+00:00"
+    },
+    "low_pitch_soft_sine": {
+      "count": 125858,
+      "score_sum": 62929.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.920778+00:00"
+    },
+    "UNK_small_internal": {
+      "count": 36398,
+      "score_sum": 18199.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.920787+00:00"
+    },
+    "low_pitch_loud_sine": {
+      "count": 14210,
+      "score_sum": 7105.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.820051+00:00"
+    },
+    "IP_small_external": {
+      "count": 81407,
+      "score_sum": 40703.5,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:32:20.639354+00:00"
+    },
+    "IP_large_external": {
+      "count": 12464,
+      "score_sum": 6232.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:32:20.466796+00:00"
+    },
+    "ARP_small_external": {
+      "count": 2531,
+      "score_sum": 1265.5,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:32:13.124566+00:00"
+    },
+    "IPV6_small_external": {
+      "count": 3111,
+      "score_sum": 1555.5,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:32:19.411653+00:00"
+    },
+    "802.1Q_small_external": {
+      "count": 45,
+      "score_sum": 22.5,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:08:13.488754+00:00"
+    },
+    "IPV6_large_external": {
+      "count": 57,
+      "score_sum": 28.5,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:30:33.596706+00:00"
+    },
+    "802.1Q_large_external": {
+      "count": 19,
+      "score_sum": 9.5,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:08:10.412547+00:00"
+    },
+    "high_pitch_soft_sawtooth": {
+      "count": 500,
+      "score_sum": 250.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:37:20.430189+00:00"
+    },
+    "TCP_small_internal": {
+      "count": 500,
+      "score_sum": 250.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:37:20.430198+00:00"
+    }
+  },
+  "Brown": {
+    "high_pitch_loud_sine": {
+      "count": 17075,
+      "score_sum": 3808.3019999998323,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.780990+00:00"
+    },
+    "cool_dim_slow_pulse": {
+      "count": 1883,
+      "score_sum": 736.7409999999985,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.562186+00:00"
+    },
+    "TCP_large_external": {
+      "count": 366,
+      "score_sum": 177.62700000000032,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:55.471677+00:00"
+    },
+    "SMOOTH_FLOW_STABLE_BEAT_FLUID_DYNAMICS_GAUSSIAN_WALK_LEAST_ACTION_SYSTEMIC_EASE_OPEN_PATH": {
+      "count": 167532,
+      "score_sum": 23405.22899999698,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.781078+00:00"
+    },
+    "TCP_small_external": {
+      "count": 760,
+      "score_sum": 311.3830000000001,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.781074+00:00"
+    },
+    "warm_dim_slow_pulse": {
+      "count": 131476,
+      "score_sum": 16049.382999994386,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.781070+00:00"
+    },
+    "UDP_large_external": {
+      "count": 298,
+      "score_sum": 144.57100000000003,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.562189+00:00"
+    },
+    "UDP_small_external": {
+      "count": 496,
+      "score_sum": 206.32299999999992,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.309179+00:00"
+    },
+    "high_pitch_soft_sine": {
+      "count": 167,
+      "score_sum": 51.237,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:54.060386+00:00"
+    },
+    "high_pitch_loud_sawtooth": {
+      "count": 9722,
+      "score_sum": 1911.4319999999188,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.885727+00:00"
+    },
+    "warm_bright_slow_pulse": {
+      "count": 34173,
+      "score_sum": 6619.105000000037,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.885731+00:00"
+    },
+    "UNK_large_internal": {
+      "count": 29080,
+      "score_sum": 5461.261999999907,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.885734+00:00"
+    },
+    "low_pitch_soft_sine": {
+      "count": 125858,
+      "score_sum": 14924.93699999465,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.923236+00:00"
+    },
+    "UNK_small_internal": {
+      "count": 36398,
+      "score_sum": 4936.6950000000215,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.923246+00:00"
+    },
+    "low_pitch_loud_sine": {
+      "count": 14210,
+      "score_sum": 2576.1649999999777,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.822316+00:00"
+    },
+    "IP_small_external": {
+      "count": 81407,
+      "score_sum": 8949.340999999584,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:32:20.641190+00:00"
+    },
+    "IP_large_external": {
+      "count": 12464,
+      "score_sum": 2431.1220000000153,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:32:20.468410+00:00"
+    },
+    "ARP_small_external": {
+      "count": 2531,
+      "score_sum": 260.8000000000086,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:32:13.126009+00:00"
+    },
+    "IPV6_small_external": {
+      "count": 3111,
+      "score_sum": 374.2360000000067,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:32:19.412994+00:00"
+    },
+    "802.1Q_small_external": {
+      "count": 45,
+      "score_sum": 4.856000000000001,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:08:13.490614+00:00"
+    },
+    "IPV6_large_external": {
+      "count": 57,
+      "score_sum": 10.088999999999988,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:30:33.598577+00:00"
+    },
+    "802.1Q_large_external": {
+      "count": 19,
+      "score_sum": 3.7679999999999993,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:08:10.414893+00:00"
+    },
+    "high_pitch_soft_sawtooth": {
+      "count": 500,
+      "score_sum": 133.1560000000002,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:37:20.436535+00:00"
+    },
+    "TCP_small_internal": {
+      "count": 500,
+      "score_sum": 133.1560000000002,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:37:20.436543+00:00"
+    }
+  },
+  "ProtocolMonitor": {
+    "high_pitch_loud_sine": {
+      "count": 17075,
+      "score_sum": 8449.666999999976,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.786813+00:00"
+    },
+    "cool_dim_slow_pulse": {
+      "count": 1883,
+      "score_sum": 736.7409999999985,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.566937+00:00"
+    },
+    "TCP_large_external": {
+      "count": 366,
+      "score_sum": 177.62700000000032,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:55.475363+00:00"
+    },
+    "SMOOTH_FLOW_STABLE_BEAT_FLUID_DYNAMICS_GAUSSIAN_WALK_LEAST_ACTION_SYSTEMIC_EASE_OPEN_PATH": {
+      "count": 167532,
+      "score_sum": 83529.06000000058,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.786832+00:00"
+    },
+    "TCP_small_external": {
+      "count": 760,
+      "score_sum": 311.3830000000001,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.786829+00:00"
+    },
+    "warm_dim_slow_pulse": {
+      "count": 131476,
+      "score_sum": 65705.8189999999,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.786826+00:00"
+    },
+    "UDP_large_external": {
+      "count": 298,
+      "score_sum": 144.57100000000003,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.566941+00:00"
+    },
+    "UDP_small_external": {
+      "count": 496,
+      "score_sum": 206.32299999999992,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:58.314645+00:00"
+    },
+    "high_pitch_soft_sine": {
+      "count": 167,
+      "score_sum": 51.237,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:40:54.065984+00:00"
+    },
+    "high_pitch_loud_sawtooth": {
+      "count": 9722,
+      "score_sum": 4861.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.887673+00:00"
+    },
+    "warm_bright_slow_pulse": {
+      "count": 34173,
+      "score_sum": 17086.5,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.887678+00:00"
+    },
+    "UNK_large_internal": {
+      "count": 29080,
+      "score_sum": 14540.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.887680+00:00"
+    },
+    "low_pitch_soft_sine": {
+      "count": 125858,
+      "score_sum": 62929.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.924950+00:00"
+    },
+    "UNK_small_internal": {
+      "count": 36398,
+      "score_sum": 18199.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.924958+00:00"
+    },
+    "low_pitch_loud_sine": {
+      "count": 14210,
+      "score_sum": 7105.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:34:30.823737+00:00"
+    },
+    "IP_small_external": {
+      "count": 81407,
+      "score_sum": 40703.5,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:32:20.697491+00:00"
+    },
+    "IP_large_external": {
+      "count": 12464,
+      "score_sum": 6232.0,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:32:20.471042+00:00"
+    },
+    "ARP_small_external": {
+      "count": 2531,
+      "score_sum": 1265.5,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:32:13.127762+00:00"
+    },
+    "IPV6_small_external": {
+      "count": 3111,
+      "score_sum": 1555.5,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:32:19.415044+00:00"
+    },
+    "802.1Q_small_external": {
+      "count": 45,
+      "score_sum": 22.5,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:08:13.492363+00:00"
+    },
+    "IPV6_large_external": {
+      "count": 57,
+      "score_sum": 28.5,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:30:33.600423+00:00"
+    },
+    "802.1Q_large_external": {
+      "count": 19,
+      "score_sum": 9.5,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:08:10.417432+00:00"
+    },
+    "high_pitch_soft_sawtooth": {
+      "count": 500,
+      "score_sum": 133.1560000000002,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:37:20.441756+00:00"
+    },
+    "TCP_small_internal": {
+      "count": 500,
+      "score_sum": 133.1560000000002,
+      "feedback": [],
+      "weight": 1.0,
+      "last_seen": "2026-01-05T21:37:20.441764+00:00"
+    }
+  }
+}

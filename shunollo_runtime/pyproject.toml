@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "shunollo-runtime"
+version = "0.1.0"
+description = "The Nervous System Scaffolding for Shunollo Agents. The Body."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {file = "../../licenses/APACHE-2.0"}
+authors = [
+    {name = "Austin", email = "austin@shunollo.org"},
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Topic :: System :: Distributed Computing",
+]
+dependencies = [
+    "shunollo-core",
+    "redis>=4.0.0"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/shunollo/shunollo"
+"Bug Tracker" = "https://github.com/shunollo/shunollo/issues"
