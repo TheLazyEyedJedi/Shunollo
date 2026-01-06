@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Run tests
+        run: |
+          pytest tests/ -v --tb=short
+
+      - name: Check Schism Compliance
+        run: |
+          # Ensure shunollo_core has no external application imports
+          # The core must remain pure and dependency-free
+          echo "Checking shunollo_core for purity..."
+          if grep -r "from omnisthesia\|import omnisthesia" shunollo_core/ --include="*.py" 2>/dev/null; then
+            echo "❌ Schism violation: External app imports found in core"
+            exit 1
+          fi
+          if grep -r "from omnisthesia\|import omnisthesia" shunollo_runtime/ --include="*.py" 2>/dev/null; then
+            echo "❌ Schism violation: External app imports found in runtime"
+            exit 1
+          fi
+          echo "✅ Schism intact: No external application imports in core/runtime"
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install linters
+        run: pip install ruff black
+
+      - name: Check formatting
+        run: black --check shunollo_core/ shunollo_runtime/
+
+      - name: Lint
+        run: ruff check shunollo_core/ shunollo_runtime/

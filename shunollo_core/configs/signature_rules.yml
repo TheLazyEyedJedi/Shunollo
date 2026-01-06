@@ -1,0 +1,29 @@
+# YAML rule list for signature mapping (first match wins)
+
+- id: burst_dos_wave
+  description: Sudden loud & bright spike, likely Denial-of-Service burst
+  mitre: [T1499]
+  thresholds:
+    sound_min: 0.6
+    light_min: 0.6
+    severity_min: 0.70
+
+- id: loud_scan
+  description: High sound, low light – possible aggressive port scan
+  mitre: [T1046]
+  thresholds:
+    sound_min: 0.8
+    light_max: 0.3
+    severity_min: 0.50
+
+- id: benign_noise
+  description: Low confidence + low severity traffic
+  mitre: []
+  thresholds:
+    conf_max: 0.05
+    severity_max: 0.25
+
+- id: unknown
+  description: Fallback signature when no other rule matches
+  mitre: []
+  thresholds: {}
