@@ -55,7 +55,7 @@ class TrainingGovernor:
 
     def safety_check(self, proposed_updates: dict) -> bool:
         """
-        COSMOS INSTITUTE AUDIT:
+        SAFETY GOVERNOR:
         Prevents 'Value Drift' where the AI learns to be useless or malicious based on bad feedback.
         """
         # 1. Radical Shift Check
