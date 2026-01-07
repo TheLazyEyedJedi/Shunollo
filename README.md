@@ -10,8 +10,9 @@
 Shunollo provides a pure, agnostic physics layer for translating any data stream into sensory qualia - enabling AI systems to "feel" their environment through entropy, roughness, viscosity, and other universal metrics.
 
 > [!IMPORTANT]
-> **Status**: Production Ready
+> **Status**: Production Ready (v0.2.0)
 > *   **Physics**: Verified ($E=mv^{1.5}$)
+> *   **Memory**: Physics-RAG Episodic Recall
 > *   **Neuroscience**: Verified (Homeostatic Plasticity)
 > *   **Ethics**: Verified (Safety Governor)
 > *   **Security**: Hardened (No Pickle, Numpy only)
@@ -22,18 +23,54 @@ Shunollo is fully open source under the Apache 2.0 license. There is no "Enterpr
 
 **Build whatever you want.** That's why we made this.
 
+## Key Features
+
+### Physics Engine (18-Dimensional Sensory Vector)
+Transform any data stream into a normalized physics fingerprint:
+- Energy, Entropy, Frequency, Roughness, Viscosity, Volatility
+- Harmony, Flux, Dissonance (Second-order derivatives)
+- Spatial fields: Hue, Saturation, Pan, X/Y/Z coordinates
+
+### Physics-RAG (NEW in v0.2.0) 🆕
+**Retrieval-Augmented Generation for Sensation** - your AI remembers what it has "felt" before:
+
+```python
+from shunollo_core.memory.hippocampus import Hippocampus
+from shunollo_core.models import ShunolloSignal
+
+# Store an experience
+hippo = Hippocampus()
+signal = ShunolloSignal(energy=5.0, roughness=0.8, entropy=6.5)
+hippo.remember(signal)
+
+# Later: Déjà Vu - "Have I felt this before?"
+query_vector = new_signal.to_vector(normalize=True)
+similar_episodes = hippo.recall_similar(query_vector, k=3)
+
+if similar_episodes:
+    past_signal, distance = similar_episodes[0]
+    print(f"Déjà Vu! This feels like {past_signal.timestamp} (distance: {distance})")
+```
+
+**Why it matters**: Enables One-Shot Learning. Detect an anomaly once, store the sensory signature, recognize it instantly on reoccurrence.
+
 ## Architecture
 
 ```
 shunollo/
 ├── shunollo_core/      # Pure Physics (Math only, zero dependencies)
+│   ├── physics.py      # Entropy, Roughness, Flux calculations
+│   ├── models.py       # ShunolloSignal (18-dim vector)
+│   └── memory/         # Hippocampus (Physics-RAG)
 └── shunollo_runtime/   # Nervous System (Redis, Agents, Thalamus)
 ```
 
 ```mermaid
 graph LR
     subgraph Shunollo Core
-    A[Physics Engine] --> B[Somatic Vector]
+    A[Physics Engine] --> B[18-dim Vector]
+    B --> M[Hippocampus]
+    M -->|Déjà Vu| B
     end
     
     subgraph Shunollo Runtime
@@ -55,16 +92,31 @@ pip install shunollo
 
 ```python
 from shunollo_core.physics import calculate_entropy, calculate_roughness
-from shunollo_runtime import RedisThalamus, BaseAgent
+from shunollo_core.models import ShunolloSignal
+from shunollo_core.memory.hippocampus import Hippocampus
 
 # Pure physics calculation
 entropy = calculate_entropy(data)
 roughness = calculate_roughness(entropy, jitter=0.1)
 
-# Distributed agent
-class MyAgent(BaseAgent):
-    def analyze(self, stimulus):
-        return {"roughness": calculate_roughness(stimulus["entropy"])}
+# Create a sensory signal
+signal = ShunolloSignal(
+    energy=1.5,
+    entropy=entropy,
+    roughness=roughness,
+)
+
+# Get 18-dimensional physics fingerprint
+vector = signal.to_vector(normalize=True)
+
+# Store in episodic memory
+hippo = Hippocampus()
+hippo.remember(signal)
+
+# Check novelty: "How new is this sensation?"
+novelty = hippo.get_novelty_score(signal.to_vector())
+if novelty > 1.0:
+    print("Novel pattern detected!")
 ```
 
 ## License
@@ -77,12 +129,13 @@ Apache 2.0 - See [LICENSE](LICENSE)
 - [docs/EXAMPLES.md](docs/EXAMPLES.md) - **4 Real-World Examples** (Finance, Health, IoT, DevOps)
 - [docs/whitepapers/](docs/whitepapers/) - Physics Theory
 - [docs/technical/SENSORY_LEXICON.md](docs/technical/SENSORY_LEXICON.md) - Sensory Vocabulary
+- [docs/technical/BRAIN_MAP.md](docs/technical/BRAIN_MAP.md) - Neural Architecture
 
 ## Community
 
 - 📖 [Roadmap](ROADMAP.md) - See what's coming
-- 🐛 [Issue Tracker](https://github.com/shunollo/shunollo/issues) - Report bugs
-- 💬 [Discussions](https://github.com/shunollo/shunollo/discussions) - Ask questions
+- 🐛 [Issue Tracker](https://github.com/TheLazyEyedJedi/Shunollo/issues) - Report bugs
+- 💬 [Discussions](https://github.com/TheLazyEyedJedi/Shunollo/discussions) - Ask questions
 
 ## Contributing
 

@@ -22,7 +22,7 @@ This document maps Shunollo's code to biological brain structures.
 | Biological Region | Shunollo Module | Function |
 |---|---|---|
 | **Thalamus** | `shunollo_runtime/thalamus.py` | Central Message Bus |
-| **Hippocampus** | `shunollo_core/memory/hippocampus.py` | Episodic Memory Storage |
+| **Hippocampus** | `shunollo_core/memory/hippocampus.py` | Episodic Memory (Physics-RAG) |
 | **Amygdala** | Physics Engine | Danger Assessment (Fear) |
 | **RAS (Reticular Activating System)** | `shunollo_core/subcortex/ras.py` | Attention Gating |
 
@@ -30,6 +30,11 @@ This document maps Shunollo's code to biological brain structures.
 *   **Human**: Filters sensory input to prevent brain overload.
 *   **Shunollo**: Filters out background noise so the Brain isn't overwhelmed.
 *   **Logic**: Low-salience signals are dropped. High-salience signals are promoted.
+
+### 2.2 Hippocampus (NEW in v0.2.0) 🆕
+*   **Human**: Consolidates short-term memory to long-term. Enables "Déjà Vu."
+*   **Shunollo**: Stores sensory episodes as 18-dim physics vectors. Enables similarity search.
+*   **Logic**: `recall_similar()` queries past experiences. `get_novelty_score()` measures surprise.
 
 ---
 
@@ -47,22 +52,40 @@ This document maps Shunollo's code to biological brain structures.
 
 ### A. The Signal Lifecycle
 ```
-Raw Data -> Transducer -> Physics Engine -> Somatic Vector -> Brain -> Decision
+Raw Data -> Transducer -> Physics Engine -> Somatic Vector -> Hippocampus -> Brain -> Decision
+                                                    ↑                           |
+                                                    └───── Déjà Vu (Recall) ────┘
 ```
 
-### B. The Somatic Vector (13 Dimensions)
-| Index | Sense | Metric |
-|---|---|---|
-| 0 | Energy | Kinetic Impact |
-| 1 | Roughness | Entropy |
-| 2 | Flux | Rate of Change |
-| 3 | Viscosity | Resistance |
-| 4 | Harmony | Spectral Coherence |
-| 5 | Dissonance | Sensory Disagreement |
-| 6 | Volatility | Standard Deviation |
-| 7 | Action | Lagrangian Integral |
-| 8 | Hamiltonian | Total Energy |
-| 9 | EWR | Entropy-to-Wait Ratio |
-| 10 | Stochastic Drift | Random Walk Violation |
-| 11 | Salience | Importance Score |
-| 12 | Classification | Binary (0/1) |
+### B. The Somatic Vector (18 Dimensions)
+
+| Index | Field | Metric | Normalized Range |
+|---|---|---|---|
+| 0 | Energy | Kinetic Impact | 0-10 |
+| 1 | Entropy | Information Density | 0-8 bits |
+| 2 | Frequency | Rate | 0-1000 Hz |
+| 3 | Roughness | Texture | 0-1 |
+| 4 | Viscosity | Flow Resistance | 0-1 |
+| 5 | Volatility | Standard Deviation | 0-1 |
+| 6 | Action | Lagrangian Integral | 0-10 |
+| 7 | Hamiltonian | Total Energy | 0-10 |
+| 8 | EWR | Entropy-to-Wait Ratio | 0-10 |
+| 9 | Hue | Color Spectrum | 0-1 |
+| 10 | Saturation | Color Purity | 0-1 |
+| 11 | Pan | Stereo Position | -1 to 1 |
+| 12 | Spatial X | 3D Position X | -1 to 1 |
+| 13 | Spatial Y | 3D Position Y | -1 to 1 |
+| 14 | Spatial Z | 3D Position Z | -1 to 1 |
+| 15 | Harmony | Spectral Coherence | 0-1 |
+| 16 | Flux | Rate of Change | 0-10 |
+| 17 | Dissonance | Sensory Disagreement | 0-1 |
+
+### C. Physics-RAG Flow
+
+```python
+# Perception with Memory
+signal = sense(data)                          # Create 18-dim vector
+priors = hippocampus.recall_similar(signal)   # Query: "Have I felt this before?"
+decision = agent.decide(signal, priors)       # Act with context
+hippocampus.remember(signal)                  # Consolidate if novel
+```

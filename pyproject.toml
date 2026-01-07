@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "shunollo"
-version = "0.1.2"
+version = "0.2.0"
 description = "Biomimetic Physics Engine for Cognitive Architectures"
 readme = "README.md"
 requires-python = ">=3.9"
