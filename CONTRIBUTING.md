@@ -18,12 +18,12 @@ Shunollo is strictly divided into two domains. You must know which one you are e
 ## 2. Development Setup
 
 ### Prerequisite
-*   Python 3.10+
+*   Python 3.9+
 *   Poetry (Recommended) or pip
 
 ### Installation
 ```bash
-git clone https://github.com/shunollo-labs/shunollo.git
+git clone https://github.com/TheLazyEyedJedi/Shunollo.git
 cd shunollo
 pip install -e ".[dev]"
 ```

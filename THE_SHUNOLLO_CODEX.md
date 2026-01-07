@@ -8,7 +8,7 @@ The Shunollo Platform is a cognitive observability system modeled after biologic
 ### The "Synaptic Stack" (Decentralized)
 ```mermaid
 graph TD
-    A[Level 1: Physics Core] -->|13-dim Vector| B[Level 2: Runtime]
+    A[Level 1: Physics Core] -->|18-dim Vector| B[Level 2: Runtime]
     B -->|Sensation Event| C[Level 3: Application]
     
     subgraph Physics Core

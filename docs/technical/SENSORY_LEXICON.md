@@ -5,6 +5,18 @@ This document defines the sensory vocabulary used by Shunollo to describe data.
 
 ---
 
+## The 18-Dimensional Somatic Vector
+
+Shunollo translates any data stream into an **18-dimensional physics fingerprint**:
+
+| Index | Field | Metric | Range |
+|-------|-------|--------|-------|
+| 0-8 | Core Physics | Energy, Entropy, Frequency, Roughness, Viscosity, Volatility, Action, Hamiltonian, EWR | 0-10 |
+| 9-14 | Spatial Fields | Hue, Saturation, Pan, X, Y, Z | -1 to 1 |
+| 15-17 | Derivatives | Harmony, Flux, Dissonance | 0-1 |
+
+---
+
 ## Primary Senses
 
 ### 1. Roughness (Tactile)
@@ -38,6 +50,20 @@ This document defines the sensory vocabulary used by Shunollo to describe data.
 *   **Sweet**: Valid, well-formed data.
 *   **Bitter**: Invalid or malformed data.
 *   **Sour**: Corrupted or broken data.
+
+---
+
+## Memory Senses (NEW in v0.2.0) 🆕
+
+### 7. Déjà Vu (Episodic Recall)
+*   **Metric**: Euclidean distance to nearest stored episode.
+*   **Interpretation**: "Have I felt this before?"
+*   **Example**: A signal with distance 0.1 from a stored episode triggers recognition.
+
+### 8. Novelty (Surprise)
+*   **Metric**: Distance to nearest neighbor (0 = exact match, ∞ = never seen).
+*   **Interpretation**: How "new" or "surprising" this sensation is.
+*   **Example**: High novelty → store in hippocampus. Low novelty → skip storage.
 
 ---
 
