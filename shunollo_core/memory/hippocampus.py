@@ -63,6 +63,44 @@ class Hippocampus:
                 # Corrupted memory
                 continue
 
+    def recall_similar(self, query_vector: List[float], k: int = 3, threshold: float = 2.0) -> List[tuple]:
+        """
+        Find episodes with similar physics vectors (Déjà Vu / Physics-RAG).
+        
+        Args:
+            query_vector: 13-dimensional physics fingerprint
+            k: Maximum number of matches to return
+            threshold: Maximum Euclidean distance to consider a match (lower = stricter)
+        
+        Returns:
+            List of (ShunolloSignal, distance) tuples, sorted by similarity (closest first).
+        """
+        if not self.storage_path.exists():
+            return []
+        
+        lines = self.storage_path.read_text(encoding="utf-8").splitlines()
+        if not lines:
+            return []
+        
+        matches = []
+        for line in lines:
+            try:
+                data = json.loads(line)
+                signal = ShunolloSignal(**data)
+                stored_vector = signal.to_vector()
+                
+                # Euclidean distance (13 floats = trivial compute)
+                distance = sum((a - b) ** 2 for a, b in zip(query_vector, stored_vector)) ** 0.5
+                
+                if distance <= threshold:
+                    matches.append((signal, distance))
+            except Exception:
+                continue
+        
+        # Sort by distance (closest = most similar)
+        matches.sort(key=lambda x: x[1])
+        return matches[:k]
+
     def clear_memory(self):
         """Amnesia."""
         if self.storage_path.exists():

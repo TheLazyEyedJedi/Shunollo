@@ -49,6 +49,27 @@ class ShunolloSignal(BaseModel):
     # 3. Context
     metadata: Dict[str, Any] = Field(default_factory=dict) # Source data (payload, user_id, etc)
 
+    def to_vector(self) -> List[float]:
+        """
+        Export 13-dimensional physics vector for similarity search (Physics-RAG).
+        This is the "fingerprint" of how this signal FELT.
+        """
+        return [
+            self.energy,      # 0: Amplitude
+            self.entropy,     # 1: Information Density
+            self.frequency,   # 2: Rate
+            self.roughness,   # 3: Texture
+            self.viscosity,   # 4: Flow Resistance
+            self.volatility,  # 5: Brownian Deviation
+            self.action,      # 6: Lagrangian
+            self.hamiltonian, # 7: Total Energy
+            self.ewr,         # 8: Entropy-to-Wait Ratio
+            self.harmony,     # 9: Consonance
+            self.flux,        # 10: Rate of Change
+            self.dissonance,  # 11: Cross-Modal Conflict
+            self.hue,         # 12: Color/Spectrum
+        ]
+
 
 class AgentResult(BaseModel):
     agent: str

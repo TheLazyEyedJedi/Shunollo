@@ -15,6 +15,7 @@ This roadmap shows planned features for the open-source Shunollo project. All fe
 - [x] **Examples**: Finance, Health, IoT, DevOps
 
 ## v0.2.0 - Sensory Expansion (Q2 2026)
+- [x] **Physics-RAG (The Recall Loop)**: Episodic memory recall during perception (Déjà Vu)
 - [ ] **Interoception**: Internal state modeling (Temperature, Hunger)
 - [ ] **Chronoception**: Time perception and rhythm detection
 - [ ] **Improved Habituation**: Adaptive RAS thresholds
