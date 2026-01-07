@@ -26,7 +26,7 @@ class Hippocampus:
         Encodes a conscious experience (Signal) into Long-Term Memory.
         """
         # Serialize
-        record = signal.dict()
+        record = signal.model_dump()
         # Ensure timestamp is string
         if isinstance(record.get("timestamp"), datetime):
             record["timestamp"] = record["timestamp"].isoformat()
