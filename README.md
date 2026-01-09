@@ -10,12 +10,11 @@
 Shunollo provides a pure, agnostic physics layer for translating any data stream into sensory qualia - enabling AI systems to "feel" their environment through entropy, roughness, viscosity, and other universal metrics.
 
 > [!IMPORTANT]
-> **Status**: Production Ready (v0.2.0)
-> *   **Physics**: Verified ($E=mv^{1.5}$)
-> *   **Memory**: Physics-RAG Episodic Recall
-> *   **Neuroscience**: Verified (Homeostatic Plasticity)
-> *   **Ethics**: Verified (Safety Governor)
-> *   **Security**: Hardened (No Pickle, Numpy only)
+> **Status**: Production Ready (v0.3.7)
+> *   **Physics**: Tiered (Mechanics, Thermo, Quantum, Optics)
+> *   **Integrity**: 228 Tests (Unit, Integration, Functional, Performance)
+> *   **Intelligence**: Active Inference + DDM select-action loop
+> *   **Safety**: Verified (Refractory Period, Thermal Limits)
 
 ## 100% Open Source
 
@@ -60,11 +59,12 @@ if similar_episodes:
 
 ```
 shunollo/
-├── shunollo_core/      # Pure Physics (Math only, zero dependencies)
-│   ├── physics.py      # Entropy, Roughness, Flux calculations
-│   ├── models.py       # ShunolloSignal (18-dim vector)
-│   └── memory/         # Hippocampus (Physics-RAG)
-└── shunollo_runtime/   # Nervous System (Redis, Agents, Thalamus)
+├── shunollo_core/       # Pure Physics (Math only)
+│   ├── physics/         # Mechanics, Thermo, Quantum, etc.
+│   ├── brain/           # Autoencoder (Imagination)
+│   ├── cognition/       # Active Inference + DDM
+│   └── memory/          # Holographic + Hippocampus
+└── shunollo_runtime/    # Nervous System (Event Bus)
 ```
 
 ```mermaid
@@ -93,11 +93,8 @@ pip install shunollo
 ## Quick Start
 
 ```python
-from shunollo_core.physics.mechanics import calculate_entropy, calculate_roughness, vectorize_sensation
-from shunollo_core.models import ShunolloSignal
-from shunollo_core.memory.hippocampus import Hippocampus
-
 # Pure physics calculation
+from shunollo_core.physics.mechanics import calculate_entropy, calculate_roughness
 entropy = calculate_entropy(data)
 roughness = calculate_roughness(entropy, jitter=0.1)
 
