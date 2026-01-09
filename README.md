@@ -32,7 +32,7 @@ Transform any data stream into a normalized physics fingerprint:
 - **Time Series**: Volatility, Lyapunov Exponents, Poisson Detection
 - **High-Order**: Dissonance, Hamiltonian, Lagrangian Action
 
-### Physics-RAG (NEW in v0.2.0) 🆕
+### Physics-RAG (v0.3.7) 🆕
 **Retrieval-Augmented Generation for Sensation** - your AI remembers what it has "felt" before:
 
 ```python
