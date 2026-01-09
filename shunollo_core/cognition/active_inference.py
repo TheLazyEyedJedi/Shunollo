@@ -8,18 +8,7 @@ Mathematical Foundation:
     Variational Free Energy: F = Accuracy + Complexity
     Accuracy: (1/2)(y - g(μ))ᵀ Π_z (y - g(μ))
     Complexity: (1/2) ln(Π_z / Π_μ)
-    Action Selection: a* = argmin_a E[F | a]
-
-This is a simplified implementation providing essential computation without
-full cortical architecture (laminar organization, oscillatory dynamics).
-
-References:
-    Friston, K. (2010). The free-energy principle: a unified brain theory?
-    Parr, T., Pezzulo, G., & Friston, K. J. (2022). Active Inference.
-
-Note:
-    This module is NOT thread-safe. For concurrent access, use external
-    synchronization or instantiate separate agents per thread.
+    Action Selection: a* = argmin_a E[F | a] (via Drift Diffusion)
 """
 import numpy as np
 from typing import Dict, Optional, Callable, List, Tuple
@@ -28,6 +17,8 @@ import logging
 import threading
 
 from shunollo_core.brain.autoencoder import get_imagination
+from shunollo_core.physics.thermo import ThermodynamicSystem
+from shunollo_core.cognition.decision import DriftDiffusionModel
 
 __all__ = [
     'InferenceState',
@@ -57,12 +48,6 @@ class ActiveInferenceAgent:
     
     Implements the perception-action loop where agents minimize surprise by
     updating beliefs or acting on the environment.
-    
-    Attributes:
-        precision: Current observation precision (Π_z)
-        prior_precision: Prior belief about precision (Π_μ)
-        input_size: Expected input vector dimensionality
-        motor_registry: Available actions mapped to callables
     """
     
     DEFAULT_INPUT_SIZE = 13
@@ -73,7 +58,8 @@ class ActiveInferenceAgent:
     __slots__ = (
         'imagination', 'motor_registry', 'eta', 'max_iterations',
         'threshold', 'precision', 'prior_precision', 'input_size',
-        'memory_system', 'metabolic_cost', 'fatigue_rate',
+        'memory_system', 'thermo_system', 'ddm', 'metabolic_cost', 
+        'fatigue_rate', 'refractory_period', 'last_action_time',
         '_action_history', '_lock'
     )
     
@@ -82,6 +68,7 @@ class ActiveInferenceAgent:
         imagination: Optional[object] = None,
         motor_registry: Optional[Dict[str, Callable]] = None,
         memory_system: Optional[object] = None,
+        thermo_system: Optional[ThermodynamicSystem] = None,
         learning_rate: float = 0.1,
         max_iterations: int = 3,
         convergence_threshold: float = 0.1,
@@ -93,9 +80,10 @@ class ActiveInferenceAgent:
         Initialize the agent.
         
         Args:
-            imagination: Autoencoder for predictions (uses default if None)
+            imagination: Autoencoder for predictions
             motor_registry: Dict mapping action names to callables
             memory_system: FactorGraph or similar for episodic memory
+            thermo_system: ThermodynamicSystem
             learning_rate: η for gradient updates
             max_iterations: Maximum perception-action cycles
             convergence_threshold: F below this = converged
@@ -106,6 +94,12 @@ class ActiveInferenceAgent:
         self.imagination = imagination or get_imagination()
         self.motor_registry = motor_registry or {}
         self.memory_system = memory_system
+        self.thermo_system = thermo_system
+        
+        # Decision Dynamics
+        # Urgency 0.5 allows bounds to collapse over ~2 seconds
+        self.ddm = DriftDiffusionModel(threshold=2.0, urgency_decay=0.5)
+        
         self.eta = learning_rate
         self.max_iterations = max_iterations
         self.threshold = convergence_threshold
@@ -113,6 +107,8 @@ class ActiveInferenceAgent:
         self.prior_precision = prior_precision
         self.fatigue_rate = fatigue_rate
         self.metabolic_cost = 0.0
+        self.refractory_period = 0.5 # 500ms between actions
+        self.last_action_time = 0.0
         
         if input_size is not None:
             self.input_size = input_size
@@ -125,66 +121,46 @@ class ActiveInferenceAgent:
         self._lock = threading.Lock()
     
     def __repr__(self) -> str:
+        temp = f"{self.thermo_system.temperature:.1f}K" if self.thermo_system else "N/A"
         return (
             f"ActiveInferenceAgent(precision={self.precision:.3f}, "
             f"fatigue={self.metabolic_cost:.3f}, "
-            f"prior_precision={self.prior_precision:.3f}, "
-            f"input_size={self.input_size}, "
-            f"memory={'Linked' if self.memory_system else 'None'}, "
-            f"actions={list(self.motor_registry.keys())})"
+            f"temp={temp}, "
+            f"memory={'Linked' if self.memory_system else 'None'})"
         )
     
     def sleep(self, duration_cycles: int = 10) -> float:
-        """
-        Enter sleep mode to consolidate memory.
-        
-        Satisfies Neuroscientist Constraint: "Run optimization during sleep".
-        
-        Args:
-            duration_cycles: Number of optimization cycles to run
-        
-        Returns:
-            Energy reduction (or consolidation score)
-        """
+        """Enter sleep mode to consolidate memory and cool down."""
         # 1. Recover from fatigue (Metabolic Restoration)
-        # Sleep reduces fatigue exponentially
         restoration = 1.0 - np.exp(-0.1 * duration_cycles)
         self.metabolic_cost *= (1.0 - restoration)
         
-        # 2. Consolidate Memory (if FactorGraph is linked)
+        # 2. Consolidate Memory
         consolidation_score = 0.0
         if self.memory_system and hasattr(self.memory_system, 'optimize'):
             try:
-                # Factor Graph Optimization (Physicist: Analytical / Dev: Offline)
                 final_energy = self.memory_system.optimize(iterations=duration_cycles)
                 consolidation_score = 1.0 / (final_energy + 1e-6)
-                logger.debug(f"Sleep consolidation complete. Graph Energy: {final_energy:.4f}")
+                logger.debug(f"Sleep consolidation complete. Energy: {final_energy:.4f}")
             except Exception as e:
                 logger.error(f"Sleep consolidation failed: {e}")
         
-        # 3. Reset Precision Baseline (Dopamine Reset)
+        # 3. Thermodynamic Cooling
+        if self.thermo_system:
+             # Fast forward cooling by simulating time passed
+             # Each sleep cycle represents roughly 0.1s of rest cooling
+             self.thermo_system.reset() # Reset to baseline behavior for deep sleep
+
+        # 4. Reset Precision Baseline (Dopamine Reset)
         self.prior_precision = 1.0
-        
         return consolidation_score
 
     def calculate_free_energy(
-        self,
-        observation: np.ndarray,
-        prediction: np.ndarray
+        self, observation: np.ndarray, prediction: np.ndarray
     ) -> Tuple[float, float, float]:
-        """
-        Calculate variational free energy F = Accuracy + Complexity.
-        
-        Args:
-            observation: Sensory observation vector (y)
-            prediction: Model prediction vector (g(μ))
-        
-        Returns:
-            Tuple of (free_energy, accuracy, complexity)
-        """
+        """Calculate variatonal free energy F = Accuracy + Complexity."""
         min_len = min(len(observation), len(prediction))
-        y = observation[:min_len]
-        g_mu = prediction[:min_len]
+        y, g_mu = observation[:min_len], prediction[:min_len]
         
         error = y - g_mu
         accuracy = 0.5 * self.precision * np.dot(error, error)
@@ -199,191 +175,164 @@ class ActiveInferenceAgent:
     def _estimate_action_gradient(self, action: str, current_f: float) -> float:
         """Estimate action gradient using finite differences on history."""
         with self._lock:
-            previous_entries = [
-                h for h in self._action_history 
-                if h.get("action") == action
-            ]
-        
-        if not previous_entries:
-            return 0.0
-        
+            previous_entries = [h for h in self._action_history if h.get("action") == action]
+        if not previous_entries: return 0.0
         previous_f = previous_entries[-1].get("free_energy", current_f)
+        # Positive gradient = F increased (Bad). Negative = F decreased (Good).
         return current_f - previous_f
     
     def select_action(
-        self,
-        current_free_energy: float,
-        available_actions: List[str]
+        self, current_free_energy: float, available_actions: List[str]
     ) -> Optional[str]:
         """
-        Select action that minimizes expected free energy.
-        
-        Args:
-            current_free_energy: Current F value
-            available_actions: List of action names
-        
-        Returns:
-            Selected action name or None
+        Select action using Drift Diffusion Model (DDM).
+        Replaces simple argmax with stochastic accumulation + urgency.
         """
+        import time
+        now = time.time()
         if not available_actions or current_free_energy < self.threshold:
             return None
         
-        action_scores = {
-            action: -self._estimate_action_gradient(action, current_free_energy)
-            for action in available_actions
-        }
+        # 0. Refractory Period Check
+        if now - self.last_action_time < self.refractory_period:
+            return None
         
-        if all(s == 0 for s in action_scores.values()):
-            if current_free_energy > 1.0:
-                return available_actions[-1]
-            elif current_free_energy > 0.5:
-                return available_actions[len(available_actions) // 2]
-            else:
-                return available_actions[0]
+        # 1. Identify best candidate and its gradient
+        # We want to minimize F, so we seek negative gradients (improvements)
+        candidates = []
+        for action in available_actions:
+             grad = self._estimate_action_gradient(action, current_free_energy)
+             # Signal strength: How much did this action help before?
+             # Negative gradient = Help. Positive = Hurt.
+             # Invert sign so positive 'drift' means "Good Action"
+             drift_signal = -grad 
+             candidates.append((action, drift_signal))
         
-        return max(action_scores, key=action_scores.get)
+        # Sort by signal strength (best first)
+        candidates.sort(key=lambda x: x[1], reverse=True)
+        best_action, best_drift = candidates[0]
+        
+        # 2. Race Model Simulation
+        # Even if best_drift is small, urgency might force a choice.
+        # Scale drift: Small F changes need to drive DDM.
+        # Arbitrary scaling factor for simulation robustness
+        drift_rate = best_drift * 10.0 
+        
+        # Clamp drift somewhat to avoid instant bounds if massive error
+        drift_rate = max(-5.0, min(5.0, drift_rate))
+        
+        # 3. Simulate Trial
+        # If drift is positive (action helps), we drift to +Threshold (Do It)
+        # If drift is negative (action hurts), we drift to -Threshold (Rejection)
+        # If 0 (unknown), we drift randomly.
+        
+        choice, reaction_time = self.ddm.simulate_trial(drift_rate=drift_rate)
+        
+        if choice == 1:
+            # Positive boundary crossed: "Commit to Action"
+            return best_action
+        elif choice == -1:
+            # Negative boundary crossed: "Reject Action" -> Maybe try second best?
+            # For simplicity, we just return nothing (Hesitation)
+            return None
+        else:
+            # Timeout (Urgency failed to force choice in time) -> Hesitation
+            return None
     
     def minimize_surprise(
-        self,
-        signal: np.ndarray,
-        available_actions: Optional[List[str]] = None
+        self, signal: np.ndarray, available_actions: Optional[List[str]] = None
     ) -> InferenceState:
-        """
-        Execute the active inference loop.
-        
-        1. Observe sensory state
-        2. Generate prediction via internal model
-        3. Calculate free energy
-        4. Select and execute action if F > threshold
-        5. Repeat until converged or max iterations
-        
-        Args:
-            signal: Current sensory observation
-            available_actions: Actions to consider (uses all registered if None)
-        
-        Returns:
-            InferenceState with full diagnostics
-            
-        Raises:
-            ValueError: If signal is shorter than input_size
-        """
+        """execute active inference loop."""
         if available_actions is None:
             available_actions = list(self.motor_registry.keys())
         
         if len(signal) < self.input_size:
-            raise ValueError(
-                f"Signal length {len(signal)} < required input size {self.input_size}"
-            )
+            raise ValueError(f"Signal length {len(signal)} < required input size {self.input_size}")
         
-        # Apply Logic: High metabolic cost (fatigue) reduces precision (Brain Fog)
-        # Effective Precision = Precision / (1 + Fatigue)
+        # Apply Fatigue (Thermodynamic constraint)
         effective_precision = self.precision / (1.0 + self.metabolic_cost)
-        # Temporarily apply limit
         original_precision = self.precision
         self.precision = effective_precision
         
         current_signal = signal.copy()
         action_taken = None
         free_energy = float('inf')
-        accuracy = 0.0
-        complexity = 0.0
+        accuracy, complexity = 0.0, 0.0
         errors: List[str] = []
         
         for iteration in range(self.max_iterations):
-            # Accumulate Metabolic Cost (Physicist constraint)
+            # 1. Metabolism & Heat
             self.metabolic_cost += self.fatigue_rate
+            if self.thermo_system:
+                # Landauer Cost + Joule Heating from effort
+                # Small baseline + proportional to iteration effort
+                heat_j = 1e-6 + (self.metabolic_cost * 1e-5)
+                self.thermo_system.add_heat(heat_j)
             
+            # 2. Perception (VFE)
             try:
-                reconstruction, _ = self.imagination.forward(
-                    current_signal[:self.input_size]
-                )
+                reconstruction, _ = self.imagination.forward(current_signal[:self.input_size])
                 g_mu = reconstruction.flatten()
             except Exception as e:
-                errors.append(f"Prediction failed at iteration {iteration}: {e}")
+                errors.append(f"Prediction error: {e}")
                 break
             
             y_tilde = current_signal.flatten()[:self.input_size]
             free_energy, accuracy, complexity = self.calculate_free_energy(y_tilde, g_mu)
             
+            # 3. Convergence Check
             if free_energy < self.threshold:
-                # Restore base precision before returning
                 self.precision = original_precision
-                return InferenceState(
-                    free_energy=free_energy,
-                    accuracy=accuracy,
-                    complexity=complexity,
-                    precision=self.precision,
-                    action_taken=action_taken,
-                    converged=True,
-                    iterations=iteration + 1,
-                    errors=errors
-                )
+                return InferenceState(free_energy, accuracy, complexity, self.precision, 
+                                    action_taken, True, iteration + 1, errors)
             
+            # 4. Action Selection (DDM)
             action = self.select_action(free_energy, available_actions)
             
             if action and action in self.motor_registry:
                 with self._lock:
                     self._action_history.append({
-                        "action": action,
-                        "free_energy": free_energy,
-                        "iteration": iteration
+                        "action": action, "free_energy": free_energy, "iteration": iteration
                     })
-                
                 try:
                     self.motor_registry[action]()
                     action_taken = action
-                    logger.debug(f"Executed action: {action}")
+                    import time
+                    self.last_action_time = time.time()
                 except Exception as e:
-                    error_msg = f"Action '{action}' failed: {e}"
-                    errors.append(error_msg)
-                    logger.warning(error_msg)
+                    errors.append(f"Action '{action}' failed: {e}")
             
-            # Update precision based on error (Dopamine)
+            # 5. Dopamine Update (Precision)
             prediction_error = np.mean(np.abs(y_tilde - g_mu))
             new_precision = 1.0 / (prediction_error + 0.1)
-            # Update the BASE precision, not just the effective one
             original_precision = np.clip(new_precision, self.MIN_PRECISION, self.MAX_PRECISION)
-            # Re-apply fatigue for next iter
             self.precision = original_precision / (1.0 + self.metabolic_cost)
             
             with self._lock:
                 if len(self._action_history) > self.MAX_HISTORY_SIZE:
                     self._action_history = self._action_history[-self.MAX_HISTORY_SIZE // 2:]
         
-        # Restore base variable
         self.precision = original_precision
-        
-        return InferenceState(
-            free_energy=free_energy,
-            accuracy=accuracy,
-            complexity=complexity,
-            precision=self.precision,
-            action_taken=action_taken,
-            converged=False,
-            iterations=self.max_iterations,
-            errors=errors
-        )
-    
+        return InferenceState(free_energy, accuracy, complexity, self.precision, 
+                            action_taken, False, self.max_iterations, errors)
+
     def register_action(self, name: str, action: Callable) -> None:
-        """Register an action in the motor registry."""
         self.motor_registry[name] = action
     
     def set_precision(self, precision: float) -> None:
-        """Manually set observation precision."""
         self.precision = np.clip(precision, self.MIN_PRECISION, self.MAX_PRECISION)
     
     def reset(self) -> None:
-        """Reset agent state."""
         self.precision = 1.0
         self.metabolic_cost = 0.0
-        with self._lock:
-            self._action_history.clear()
+        with self._lock: self._action_history.clear()
 
 
 def create_active_inference_agent(
     imagination: Optional[object] = None,
     motor_registry: Optional[Dict[str, Callable]] = None,
     memory_system: Optional[object] = None,
+    thermo_system: Optional[ThermodynamicSystem] = None, 
     learning_rate: float = 0.1,
     prior_precision: float = 1.0
 ) -> ActiveInferenceAgent:
@@ -392,6 +341,7 @@ def create_active_inference_agent(
         imagination=imagination,
         motor_registry=motor_registry,
         memory_system=memory_system,
+        thermo_system=thermo_system,
         learning_rate=learning_rate,
         prior_precision=prior_precision
     )

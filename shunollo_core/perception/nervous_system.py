@@ -17,8 +17,6 @@ import time
 from typing import Dict, Any
 from shunollo_core.models import ShunolloSignal
 
-# Cortex Imports (Lazy or direct - direct is fine for now)
-# Cortex Imports (Lazy or direct - direct is fine for now)
 from shunollo_core.perception.auditory_cortex import synthesize_audio_event, AuditoryCortex
 from shunollo_core.perception.visual_cortex import synthesize_visual_event, analyze_scene
 from shunollo_core.perception.haptic_driver import synthesize_haptic_event
@@ -71,11 +69,7 @@ class NervousSystemEngine:
 
         # 1. Enqueue for Cortical Processing
         try:
-            # Assuming self.event_queue should be self._queue based on existing code
-            self._queue.put(signal, block=False) 
-        except Exception:
-            pass # Drop if brain is full (seizure prevention)
-
+            self._queue.put(signal, block=False)
         except Exception:
             pass # Drop if brain is full (seizure prevention)
 
@@ -117,10 +111,6 @@ class NervousSystemEngine:
                         except Exception:
                             pass # Don't crash on memory failure
 
-                    # Adapt ShunolloSignal to legacy sensory format
-                    import uuid
-                    cid = item.metadata.get("correlation_id", str(uuid.uuid4()))
-                    
                     # Adapt ShunolloSignal to legacy sensory format
                     import uuid
                     cid = item.metadata.get("correlation_id", str(uuid.uuid4()))
@@ -187,12 +177,16 @@ class NervousSystemEngine:
             if config.perception_matrix.get("enabled", True): # Check global switch
                 synthesize_audio_event(event_id, sensory_data, correlation_id=event_id)
         except Exception as e:
+            import logging
+            logging.getLogger(__name__).debug(f"[Auditory] Cortex dispatch failed: {e}")
             print(f"[Warning] [Auditory] Error: {e}")
 
         # 2. Visual Cortex
         try:
             synthesize_visual_event(sensory_data, correlation_id=event_id)
         except Exception as e:
+            import logging
+            logging.getLogger(__name__).debug(f"[Visual] Cortex dispatch failed: {e}")
             print(f"[Warning] [Visual] Error: {e}")
 
         # 3. Haptic Driver
@@ -200,6 +194,8 @@ class NervousSystemEngine:
             if "haptic" in sensory_data:
                 synthesize_haptic_event(sensory_data, correlation_id=event_id)
         except Exception as e:
+            import logging
+            logging.getLogger(__name__).debug(f"[Haptic] Cortex dispatch failed: {e}")
             print(f"[Warning] [Haptic] Error: {e}")
 
         # 4. Vocal Cords
@@ -208,6 +204,8 @@ class NervousSystemEngine:
                 # Check config specifically for TTS if needed, but module handles it
                 synthesize_speech_event(sensory_data, correlation_id=event_id)
         except Exception as e:
+            import logging
+            logging.getLogger(__name__).debug(f"[Vocal] Cortex dispatch failed: {e}")
             print(f"[Warning] [Vocal] Error: {e}")
 
 # Singleton Instance

@@ -181,7 +181,7 @@ def retrain_network(agents: List[Any], memory: AbstractMemory) -> Dict[str, floa
     except Exception as e:
             logger.error(f"Neural Training Error: {e}")
 
-    # 4. HOMEOSTATIC PLASTICITY (The Neuroscientist Fix)
+    # 4. HOMEOSTATIC PLASTICITY
     # Prevent Runaway LTP (Saturation) by normalizing total synaptic weight.
     # The brain has a finite energy budget. If one agent gets stronger, others must weaken.
     updates = _apply_homeostatic_scaling(updates)

@@ -237,10 +237,10 @@ class TestDecay:
     def test_decay_reduces_energy(self):
         mem = HolographicMemory(size=256, decay_rate=0.1, require_context=False)
         
-        mem.encode(np.random.randn(50))
+        mem.encode(np.ones(50))
         energy1 = mem._total_energy
         
-        mem.encode(np.random.randn(50))
+        mem.encode(np.ones(50))
         energy2_per_mem = mem._total_energy / 2
         
         assert energy2_per_mem < energy1

@@ -25,11 +25,13 @@ Shunollo is fully open source under the Apache 2.0 license. There is no "Enterpr
 
 ## Key Features
 
-### Physics Engine (18-Dimensional Sensory Vector)
+### Physics Engine (Multivariate Sensory Qualia)
 Transform any data stream into a normalized physics fingerprint:
-- Energy, Entropy, Frequency, Roughness, Viscosity, Volatility
-- Harmony, Flux, Dissonance (Second-order derivatives)
-- Spatial fields: Hue, Saturation, Pan, X/Y/Z coordinates
+- **Mechanics**: Energy, Entropy, Roughness, Viscosity
+- **Thermodynamics**: Temperature, Landauer Cost, Arrhenius Rates
+- **Quantum**: Radical Pair coherence, Tunneling
+- **Time Series**: Volatility, Lyapunov Exponents, Poisson Detection
+- **High-Order**: Dissonance, Hamiltonian, Lagrangian Action
 
 ### Physics-RAG (NEW in v0.2.0) 🆕
 **Retrieval-Augmented Generation for Sensation** - your AI remembers what it has "felt" before:
@@ -91,7 +93,7 @@ pip install shunollo
 ## Quick Start
 
 ```python
-from shunollo_core.physics import calculate_entropy, calculate_roughness
+from shunollo_core.physics.mechanics import calculate_entropy, calculate_roughness, vectorize_sensation
 from shunollo_core.models import ShunolloSignal
 from shunollo_core.memory.hippocampus import Hippocampus
 
@@ -106,8 +108,8 @@ signal = ShunolloSignal(
     roughness=roughness,
 )
 
-# Get 18-dimensional physics fingerprint
-vector = signal.to_vector(normalize=True)
+# Get 13-dimensional sensory vector
+vector = vectorize_sensation(signal.to_dict())
 
 # Store in episodic memory
 hippo = Hippocampus()

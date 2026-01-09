@@ -47,3 +47,18 @@ logs/
 # OS
 .DS_Store
 Thumbs.db
+
+# Private Audits & Internal Research
+docs/reviews/
+audit_report*.md
+implementation_plan.md
+task.md
+walkthrough.md
+synthesized_review*.md
+gap_analysis*.md
+
+# Runtime Data & Cache
+shunollo_core/data/*.sqlite*
+shunollo_core/data/perception_cache/
+shunollo_core/feedback/*.jsonl
+*.ppm

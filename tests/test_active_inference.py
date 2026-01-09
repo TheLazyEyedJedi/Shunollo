@@ -178,8 +178,12 @@ class TestSelectAction:
             convergence_threshold=0.1
         )
         
+        # Seed history to give "high" a strong gradient (Previous F=1.0 > Current=0.5)
+        # Gradient = 0.5 - 1.0 = -0.5 (Improvement) -> Drift = 5.0
+        agent._action_history.append({"action": "high", "free_energy": 1.0})
+        
         action = agent.select_action(0.5, ["low", "medium", "high"])
-        assert action in ["low", "medium", "high"]
+        assert action == "high"
 
 
 class TestMinimizeSurprise:
@@ -339,7 +343,7 @@ class TestActiveInferenceBiological:
         assert mock_mem.optimized
     
     def test_inference_increments_fatigue(self):
-        """Thinking should make you tired (physicist constraint)."""
+        """Thinking should make you tired (metabolic constraint)."""
         agent = ActiveInferenceAgent(fatigue_rate=0.1)
         initial_cost = agent.metabolic_cost
         

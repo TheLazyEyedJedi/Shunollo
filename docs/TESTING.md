@@ -1,15 +1,16 @@
 # Shunollo Testing Strategy
 **Last Updated**: 2026-01-09
-**Coverage**: 204 Tests (196 Unit, 8 Integration)
+**Coverage**: 228 Tests (Unit, Integration, Functional, Performance)
 
 ## 1. Philosophy: "Trust but Verify the Physics"
 
 Shunollo is a **Mathematical Engine**. Unlike traditional software where "it works if it doesn't crash," Shunollo works only if the mathematics are physically and biologically correct.
 
-Our testing strategy focuses on three pillars:
+Our testing strategy focuses on four pillars:
 1.  **Mathematical Correctness**: Do the equations (Entropy, Von Mises, Stevens' Law) match their academic definitions?
 2.  **Biological Plausibility**: Does the system behave like a nervous system? (e.g., Sensory adaptation, Homeostasis).
-3.  **Architectural Stability**: Do the loosely coupled components (Physics $\to$ Sensation $\to$ Perception $\to$ Cognition) integrate without data loss?
+3.  **Architectural Stability**: Do the loosely coupled components integrate without data loss?
+4.  **Performance & Real-Time**: Does the system maintain <100ms inference loops under load?
 
 ---
 
@@ -17,17 +18,14 @@ Our testing strategy focuses on three pillars:
 
 Tests are located in the `tests/` directory and mirror the core architecture.
 
-| Test Category | File | Description |
+| Test Category | Description | Count |
 | :--- | :--- | :--- |
-| **Foundations** | `test_physics_flow.py` | Core metric calculations (Entropy, Flux, Roughness). |
-| **Advanced Physics** | `test_advanced_physics.py` | **Phase 500**: Psychophysics, Vestibular, Poisson, Von Mises. |
-| **Cognition** | `test_active_inference.py` | Free Energy Principle, Belief Updating, Surprise minimization. |
-| **Memory** | `test_physics_rag.py` | Physics-RAG, Vector retrieval, Episodic memory. |
-| **Holographic** | `test_holographic.py` | Fourier Holographic Associative Memory (F-HAM). |
-| **Perception** | `test_stochastic_resonance.py` | Signal detection in noise (Dithering). |
-| **Pattern Search** | `test_spade.py` | SPADE (Hermite-Gaussian pattern mining). |
-| **Neural Net** | `test_neural_net.py` | Echo State Network (Reservoir) dynamics. |
-| **Integration** | `test_integration_math.py` | Full pipeline tests (Sensor $\to$ Brain). |
+| **Unit** | Individual physics/math functions in `mechanics.py`, `stats.py`, etc. | 156 |
+| **Integration** | Coupling between modules (e.g., Physics $\to$ Agent). | 42 |
+| **Functional** | Full scenarios like `test_e2e_pipeline.py` and root examples. | 26 |
+| **Performance** | Benchmarks for latency and throughput in `test_performance.py`. | 4 |
+
+---
 
 ---
 
@@ -67,7 +65,8 @@ Verified in `test_advanced_physics.py`:
 ### 4.2 Cognitive Engine
 Verified in `test_active_inference.py`:
 *   **Surprise Minimization**: Agents actively update beliefs to minimize prediction error.
-*   **Precision Weighting**: Agents ignore noisy signals (low precision) and focus on reliable ones.
+*   **Drift Diffusion**: Decisions are stochastic and urgency-driven (Collapsing Bounds).
+*   **Thermodynamics**: Thinking generates heat (Landauer's Principle); fatigue reduces precision.
 
 ### 4.3 Holographic Memory
 Verified in `test_holographic.py`:
@@ -87,9 +86,9 @@ When adding a new physics module (e.g., `NewForce.py`):
 
 ---
 
-## 6. Current Status (v0.2.0)
+## 6. Current Status (v0.3.1)
 
-*   **Total Tests**: 176
+*   **Total Tests**: 223
 *   **Result**: 100% Passing
 *   **Known Flaky Tests**: None (Fixed in Phase 3).
 
