@@ -6,7 +6,7 @@
 
 ## Abstract
 
-Physics-RAG introduces episodic memory into Shunollo's cognitive architecture, enabling AI systems to recognize previously-encountered sensory patterns without explicit signature matching. By storing and querying 18-dimensional physics vectors, agents can experience "Déjà Vu" — instant recognition of familiar sensory textures.
+Physics-RAG introduces episodic memory into Shunollo's cognitive architecture, enabling AI systems to recognize previously-encountered sensory patterns without explicit signature matching. By storing and querying **18-dimensional** physics vectors, agents can experience "Déjà Vu" — instant recognition of familiar sensory textures.
 
 ---
 
@@ -34,13 +34,12 @@ Shunollo's Hippocampus module mirrors this architecture.
 
 ### 2.1 Vector Representation
 
-Every sensory experience is encoded as an **24-dimensional normalized vector** (Updated Phase 500):
+Every sensory experience is encoded as an **18-dimensional normalized vector** (Updated v0.3.7):
 
 ```
 [energy, entropy, frequency, roughness, viscosity, volatility, 
  action, hamiltonian, ewr, hue, saturation, pan, 
- spatial_x, spatial_y, spatial_z, harmony, flux, dissonance,
- distortion, volume_log, intensity_log, velocity, strain, resonance]
+ spatial_x, spatial_y, spatial_z, harmony, flux, dissonance]
 ```
 
 Each dimension is normalized to `[0, 1]` range for fair distance comparison.

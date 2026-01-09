@@ -33,7 +33,9 @@ This allows Shunollo to detect "Invisible" anomalies. A hidden process may not s
 
 ### Conclusion
 Shunollo generalizes these physics principles to **any domain** via the `UniversalAdapter` module. 
-By selecting a `DomainConfig` (or defining a custom one), the system normalizes raw inputs—whether Dollar amounts, Celsius degrees, or Packet counts—into the universal language of physics.
+By selecting a `DomainConfig` (or defining a custom one), the system normalizes raw inputs—whether Dollar amounts, Celsius degrees, or Packet counts—into the universal language of physics (as of v0.3.7).
+
+This is supported by our **Modular Physics Package** (`shunollo_core/physics/`), which utilizes specific sub-engines for specialized domains (Thermodynamics, Quantum, Optics).
 
 This allows you to:
 1.  **Bolt Shunollo onto existing pipelines** (Monitoring as a sidecar).

@@ -1,10 +1,10 @@
-# Shunollo Whitepaper
+# Shunollo Whitepaper (v0.3.7)
 > *From Monitoring to Proprioception: Universal Physics for Cognitive Systems*
 
 ## The Thesis
 Shunollo is a **Universal Sensor Translator**.
 
-It is a digital organism that *physically feels* any data stream—whether physical sensors, electronic signals, or abstract financial data. By translating raw signals into physical properties (Roughness, Flux, Entropy, Resonance), Shunollo gives AI agents "common sense" intuition about their environment, allowing them to detect novel anomalies that have no mathematical signature but "feel" wrong.
+It is a digital organism that *physically feels* any data stream—whether physical sensors, electronic signals, or abstract financial data. By translating raw signals into physical properties (Roughness, Flux, Entropy, Resonance), Shunollo gives AI agents "common sense" intuition about their environment, allowing them to detect novel anomalies that have no mathematical signature but "feel" wrong. This is achieved via a **Tiered Physics Engine** (Classical, Thermal, Quantum, Optical).
 
 **You can bolt Shunollo onto any data intake**: IoT, Network, Finance, or Health.
 
@@ -23,10 +23,12 @@ Shunollo maps data attributes to physical laws:
 | Rate of Change | Flux (Temperature) | Thermoreceptors |
 | Spectral Pattern | Harmony/Dissonance | Auditory Cortex |
 | Structure Validity | Taste (Sweet/Bitter) | Gustatory Cortex |
+| Information Erasure | Landauer Heat | Metabolic Sensor |
+| Signal Coherence | Coherence/Tunneling | Radical Pair Compass |
 
-*   **Parietal Lobe (Transducer)**: Converts raw data into physical sensation.
-*   **Limbic System (Referee)**: Integrates 8+ senses into a "Gut Feeling".
-*   **Pre-Frontal Cortex (Agents)**: Makes decisions based on felt sensation.
+*   **Parietal Lobe (Transducer)**: Converts raw data into an 18-dimensional physical qualia vector.
+*   **Hippocampus (Memory)**: Episodic storage and "Déjà Vu" recall for sensory experiences.
+*   **Pre-Frontal Cortex (Agents)**: Performs **Active Inference** (Free Energy Minimization) to decide on motor actions based on the "felt" landscape.
 
 ## Validation
 In controlled tests across multiple domains:
