@@ -2,7 +2,7 @@
 Motor Cortex (Primary)
 ----------------------
 Biological Role: Voluntary Movement
-Cybernatic Role: The 'Action Driver' registry.
+Cybernetic Role: The 'Action Driver' registry.
 Translates High-Level Intent (Manager decisions) into Low-Level System Calls.
 
 Drivers:

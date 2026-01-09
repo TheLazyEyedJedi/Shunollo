@@ -2,7 +2,7 @@
 Parietal Cortex (Somatosensory & Spatial)
 -----------------------------------------
 Biological Role: Spatial Association, Touch, Proprioception.
-Cybernatic Role: Maps "Place" (IP) to "Space" (XYZ) and "Depth" (Hops).
+Cybernetic Role: Maps "Place" (IP) to "Space" (XYZ) and "Depth" (Hops).
 
 Functions:
 - Geolocation (XY): Maps IP to Lat/Lon (via DB or Deterministic Hash).

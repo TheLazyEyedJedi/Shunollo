@@ -34,12 +34,13 @@ Shunollo's Hippocampus module mirrors this architecture.
 
 ### 2.1 Vector Representation
 
-Every sensory experience is encoded as an **18-dimensional normalized vector**:
+Every sensory experience is encoded as an **24-dimensional normalized vector** (Updated Phase 500):
 
 ```
 [energy, entropy, frequency, roughness, viscosity, volatility, 
  action, hamiltonian, ewr, hue, saturation, pan, 
- spatial_x, spatial_y, spatial_z, harmony, flux, dissonance]
+ spatial_x, spatial_y, spatial_z, harmony, flux, dissonance,
+ distortion, volume_log, intensity_log, velocity, strain, resonance]
 ```
 
 Each dimension is normalized to `[0, 1]` range for fair distance comparison.

@@ -32,7 +32,14 @@ $$S = \int L \, dt$$
 This allows Shunollo to detect "Invisible" anomalies. A hidden process may not spike volume (Kinetic), but its presence *must* spike the system's Action potential (Tension).
 
 ### Conclusion
-Shunollo generalizes these physics principles to **any domain**: Financial markets, IoT sensors, healthcare monitoring, or server telemetry. The physics is universal—only the transducer changes.
+Shunollo generalizes these physics principles to **any domain** via the `UniversalAdapter` module. 
+By selecting a `DomainConfig` (or defining a custom one), the system normalizes raw inputs—whether Dollar amounts, Celsius degrees, or Packet counts—into the universal language of physics.
+
+This allows you to:
+1.  **Bolt Shunollo onto existing pipelines** (Monitoring as a sidecar).
+2.  **Build new cognitive applications** from the ground up (Foundation mode).
+
+The physics is universal—only the transducer changes.
 
 ---
 *© Shunollo Labs*

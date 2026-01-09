@@ -107,4 +107,80 @@ $$VETO \iff (\Delta W > 0.3) \lor (\bar{W} < 0.1)$$
 *   **Radical Shift**: No single update can shift trust > 30%.
 *   **Lobotomy**: System average trust cannot drop below 10%.
 
+
+## 6. The Physics of Perception (Phase 500)
+**Added**: 2026-01-09
+
+To act as a "Universal Sensor Translator," Shunollo implements advanced psychophysics and biophysics models to translate raw data into biologically plausible qualia.
+
+### 6.1 Stevens' Power Law (Psychophysics)
+Human perception is non-linear. The relationship between physical intensity ($I$) and perceived sensation ($S$) follows a power law:
+
+$$S = k \cdot I^n$$
+
+Shunollo applies specific exponents ($n$) based on the data domain:
+*   **Compression ($n < 1$)**: Brightness (`n=0.33`), Loudness (`n=0.67`). Useful for handling huge dynamic ranges (e.g., Log Volumes).
+*   **Linear ($n = 1$)**: Temperature, Length.
+*   **Expansion ($n > 1$)**: Electric Shock (`n=3.5`). In IT, **Errors** and **Latency** use this. A small increase in failure rate feels exponentially worse.
+
+### 6.2 Vestibular Integration (Newtonian Dynamics)
+The semicircular canals do not measure velocity directly; they measure acceleration and integrate it via fluid dynamics (Steinhausen Model).
+
+$$v(t) = \int a(t) \cdot e^{-\frac{t}{\tau}} dt$$
+
+Shunollo uses this to convert **Rate-Based Anomalies** (e.g., event rate spikes) into **Cumulative State** (Simulated Velocity). This ensures that even after a surge stops, the system remains "dizzy" (alert) until the energy dissipates naturally.
+
+### 6.3 Poisson Statistics (Quantum Detection)
+At the lowest threshold of perception (e.g., 5 photons), signals are indistinguishable from noise. We use Poisson statistics to calculate the **Probability of Detection** ($P_d$) against a background dark noise ($\lambda_{noise}$).
+
+$$P(k \ge N) = 1 - \sum_{i=0}^{N-1} \frac{\lambda^i e^{-\lambda}}{i!}$$
+
+This allows Shunollo to detect "micro-anomalies" or "gradual drift" that hides within the system's noise floor.
+
+### 6.4 Von Mises Stress (Continuum Mechanics)
+Biological tissue fails due to **Distortion** (shape change), not **Hydrostatic Pressure** (volume change). We use the Von Mises Yield Criterion to analyze multivariate system load.
+
+*   **Uniform Load** (High CPU, High Mem, High Net) = Hydrostatic Pressure = **Healthy Scaling**.
+*   **Asymmetric Load** (High CPU, Low Mem, Low Net) = Shear Stress = **Bottleneck/Anomaly**.
+
+$$\sigma_v = \sqrt{\frac{(\sigma_1 - \sigma_2)^2 + (\sigma_2 - \sigma_3)^2 + (\sigma_3 - \sigma_1)^2}{2}}$$
+
+## 7. Phase 2 Biophysics: Transduction Physics (Added 2026-01-09)
+
+Based on "The Physics of Transduction" document, we implement the remaining sensor physics to complete the universal translator.
+
+### 7.1 Chemical Kinetics (Hill-Langmuir & Nernst)
+Biological receptors saturate sigmoidally, not linearly. The Hill-Langmuir equation models this saturation:
+
+$$\theta = \frac{[L]^n}{K_d + [L]^n}$$
+
+*   **$K_d$**: Dissociation constant (concentration at 50% saturation).
+*   **$n$**: Hill coefficient (cooperativity). $n > 1$ gives a steeper "switch."
+
+The Nernst equation models concentration-driven potentials (battery curves, resource depletion):
+
+$$E = \frac{RT}{zF} \ln \frac{C_{out}}{C_{in}}$$
+
+### 7.2 ThermoDynamics (Arrhenius & Q10)
+Reaction rates (and failure rates) depend exponentially on temperature via the Arrhenius equation:
+
+$$k = A e^{-E_a / RT}$$
+
+The $Q_{10}$ coefficient captures the biological sensitivity to temperature. Typical enzymes have $Q_{10} \approx 2$; TRP thermoreceptor channels have $Q_{10} > 10$.
+
+### 7.3 MechanoFilter (Pacinian Corpuscle)
+The Pacinian corpuscle is a viscoelastic high-pass filter. It ignores static pressure but responds to texture/vibration:
+
+$$H(s) = \frac{s\tau}{1 + s\tau}$$
+
+This creates "Rapid Adaptation"—the hallmark of change detection. In Shunollo, this distinguishes *sustained load* (safe) from *oscillating load* (concerning).
+
+### 7.4 CriticalResonator (Hopf Bifurcation)
+The cochlea operates near a Hopf Bifurcation, providing massive amplification for weak signals:
+
+*   **Weak Signals**: Gain $\rightarrow 1/(2\zeta)$ (can be 50x for $\zeta = 0.01$).
+*   **Strong Signals**: Gain is compressed to avoid saturation.
+
+This allows detection *below the thermal noise floor*—something a passive sensor cannot achieve.
+
 *Authorized by Shunollo Core Team.*

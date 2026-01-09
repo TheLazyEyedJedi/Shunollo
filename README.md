@@ -130,6 +130,7 @@ Apache 2.0 - See [LICENSE](LICENSE)
 - [docs/whitepapers/](docs/whitepapers/) - Physics Theory
 - [docs/technical/SENSORY_LEXICON.md](docs/technical/SENSORY_LEXICON.md) - Sensory Vocabulary
 - [docs/technical/BRAIN_MAP.md](docs/technical/BRAIN_MAP.md) - Neural Architecture
+- [docs/TESTING.md](docs/TESTING.md) - **Testing Strategy & Validation**
 
 ## Community
 

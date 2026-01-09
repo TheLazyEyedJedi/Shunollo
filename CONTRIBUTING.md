@@ -41,8 +41,10 @@ We require all tests to pass before merging.
 
 ### Run All Tests
 ```bash
-pytest tests/ -v
+python -m pytest tests/ -v
 ```
+
+> **Note**: For a detailed explanation of our testing philosophy, strategy, and coverage areas, please see **[TESTING.md](docs/TESTING.md)**.
 
 ## 5. Code Style (The Codex)
 *   **Docstrings**: All public functions must explain the *Physics Mapping* (e.g., "Maps CPU Load to Lagrangian Action").

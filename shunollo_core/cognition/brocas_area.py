@@ -2,7 +2,7 @@
 Broca's Area
 ------------
 Biological Role: Speech Production
-Cybernatic Role: The 'Expressive Output' engine.
+Cybernetic Role: The 'Expressive Output' engine.
 It takes a 'Narrative' (from Wernicke's) or 'Command' (from Motor) and articulates it to the outside world.
 
 Outputs:

@@ -2,7 +2,7 @@
 Wernicke's Area
 ---------------
 Biological Role: Language Comprehension & Production
-Cybernatic Role: Translating 'Physics' (Feeling) into 'Narrative' (Description).
+Cybernetic Role: Translating 'Physics' (Feeling) into 'Narrative' (Description).
 
 It does NOT use an LLM for everything (too slow).
 It uses a deterministic "Reflexive Grammar" for immediate feedback, 

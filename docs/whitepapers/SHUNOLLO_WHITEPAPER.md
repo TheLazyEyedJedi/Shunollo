@@ -2,9 +2,11 @@
 > *From Monitoring to Proprioception: Universal Physics for Cognitive Systems*
 
 ## The Thesis
-Shunollo is **not** a traditional anomaly detector—it is a biomimetic physics engine.
+Shunollo is a **Universal Sensor Translator**.
 
-It is a digital organism that *physically feels* data streams. By translating raw signals into physical properties (Roughness, Flux, Entropy, Resonance), Shunollo gives AI agents "common sense" intuition about their environment, allowing them to detect novel anomalies that have no mathematical signature but "feel" wrong.
+It is a digital organism that *physically feels* any data stream—whether physical sensors, electronic signals, or abstract financial data. By translating raw signals into physical properties (Roughness, Flux, Entropy, Resonance), Shunollo gives AI agents "common sense" intuition about their environment, allowing them to detect novel anomalies that have no mathematical signature but "feel" wrong.
+
+**You can bolt Shunollo onto any data intake**: IoT, Network, Finance, or Health.
 
 ## The Problem with Traditional Systems
 *   **Signature Systems**: "If input contains pattern `X`, alert." → Fails if the pattern is obfuscated.

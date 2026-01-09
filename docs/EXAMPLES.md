@@ -41,6 +41,15 @@ This folder contains 4 "Bare Bones" examples demonstrating how to apply Shunollo
 *   **Result**: As bearings degrade, they introduce "Grit" (High Frequency Roughness). Shunollo detects this textual change long before the motor overheats.
 *   **Run**: `python examples/motor_decay.py`
 
+## 5. Universal Sensor Translator (`universal_sensor.py`) 🆕 (Phase 500)
+**Goal**: Demonstrate how **ANY** data source can be bolted onto Shunollo.
+*   **Physics Mapping**:
+    *   **Stevens' Power Law**: Perceptual scaling (e.g. Pain exponent for Errors).
+    *   **Vestibular Integration**: Rate-to-State conversion for sustained loads (e.g., fluid momentum).
+    *   **Poisson Statistics**: Quantum-limited detection of faint anomalies (e.g., sensor drift).
+*   **Result**: A complete pipeline transforming raw numbers (Temp, Pressure, Light) into AI sensations (Burn, Strain, Dazzle).
+*   **Run**: `python examples/universal_sensor.py`
+
 ---
 
 ## How it Works (The Code)

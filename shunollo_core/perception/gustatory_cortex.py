@@ -6,7 +6,7 @@ Biological Role: Chemical analysis of ingested matter (Data Payloads) for toxici
                  Sweet = Low Entropy (Glucose/Text). 
                  Sour = Structured Acid (Code/SQL).
 
-Cybernatic Role: Agnostic Content Analysis.
+Cybernetic Role: Agnostic Content Analysis.
                  "Tasting" the raw byte stream to detect format anomalies.
                  This is protocol-agnostic (works on Files, Packets, or Memory buffers).
 """
