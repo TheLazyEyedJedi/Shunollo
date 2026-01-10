@@ -50,7 +50,7 @@ class ActiveInferenceAgent:
     updating beliefs or acting on the environment.
     """
     
-    DEFAULT_INPUT_SIZE = 13
+    DEFAULT_INPUT_SIZE = 18
     MIN_PRECISION = 0.1
     MAX_PRECISION = 10.0
     MAX_HISTORY_SIZE = 100

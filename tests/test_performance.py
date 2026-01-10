@@ -33,7 +33,7 @@ def test_physics_calculation_latency():
 
 def test_inference_cycle_performance(agent):
     """Benchmark a full active inference loop."""
-    signal = np.random.rand(13)
+    signal = np.random.rand(18)
     
     start = time.perf_counter()
     count = 100

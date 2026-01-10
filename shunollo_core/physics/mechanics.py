@@ -251,17 +251,30 @@ def calculate_hamiltonian(kinetic: float, potential: float) -> float:
     return (norm_t + norm_v) / 2.0
 
 def vectorize_sensation(physics_dict: dict, protocol: str = "tcp") -> list:
-    """Convert a physics dictionary into a 13-dimensional Somatic Vector."""
-    def g(key, default=0.0):
-        return max(0.0, min(1.0, float(physics_dict.get(key, default))))
+    """Convert a physics dictionary into the standard 18-dimensional Somatic Vector."""
+    def g(key, default=0.0, min_val=0.0, max_val=1.0):
+        val = float(physics_dict.get(key, default))
+        return max(min_val, min(max_val, val))
     
-    proto = protocol.lower()
-    is_tcp = 1.0 if proto == "tcp" else 0.0
-    is_udp = 1.0 if proto == "udp" else 0.0
-    is_other = 1.0 if (not is_tcp and not is_udp) else 0.0
-    
+    # 18-Dimensional Universal Vector (Architecture 3.0)
+    # Allows for spatial, color, and audio mapping in addition to physics.
     return [
-        g("roughness"), g("flux"), g("viscosity"), g("salience"),
-        g("dissonance"), g("volatility"), g("action"), g("hamiltonian"),
-        g("ewr"), g("harmony", 1.0), is_tcp, is_udp, is_other
+        g("energy", 0.0, 0.0, 10.0),      # 0: Kinetic Impact
+        g("entropy", 0.0, 0.0, 8.0),      # 1: Info Density
+        g("frequency", 0.0, 0, 1000),     # 2: Rate
+        g("roughness"),                   # 3: Texture (0-1)
+        g("viscosity"),                   # 4: Resistance (0-1)
+        g("volatility"),                  # 5: Std Dev (0-1)
+        g("action", 0.0, 0.0, 10.0),      # 6: Lagrangian
+        g("hamiltonian", 0.0, 0.0, 10.0), # 7: Total Energy
+        g("ewr", 0.0, 0.0, 10.0),         # 8: Wait Ratio
+        g("hue"),                         # 9: Color (0-1)
+        g("saturation"),                  # 10: Purity (0-1)
+        g("pan", 0.0, -1.0, 1.0),         # 11: Stereo
+        g("spatial_x", 0.0, -1.0, 1.0),   # 12: 3D X
+        g("spatial_y", 0.0, -1.0, 1.0),   # 13: 3D Y
+        g("spatial_z", 0.0, -1.0, 1.0),   # 14: 3D Z
+        g("harmony", 1.0),                # 15: Coherence (0-1)
+        g("flux", 0.0, 0.0, 10.0),        # 16: Change Rate
+        g("dissonance")                   # 17: Disagreement (0-1)
     ]

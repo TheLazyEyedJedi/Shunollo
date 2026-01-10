@@ -12,7 +12,7 @@ from shunollo_core.cognition.active_inference import (
 class MockImagination:
     """Mock autoencoder for testing."""
     
-    def __init__(self, input_size=13):
+    def __init__(self, input_size=18):
         self.input_size = input_size
     
     def forward(self, x):
@@ -62,7 +62,7 @@ class TestActiveInferenceAgentInit:
         
         assert agent.precision == 1.0
         assert agent.prior_precision == 1.0
-        assert agent.input_size == 13
+        assert agent.input_size == 18
     
     def test_custom_parameters(self):
         mock_imagination = MockImagination()
@@ -347,7 +347,7 @@ class TestActiveInferenceBiological:
         agent = ActiveInferenceAgent(fatigue_rate=0.1)
         initial_cost = agent.metabolic_cost
         
-        signal = np.random.randn(13)
+        signal = np.random.randn(18)
         agent.minimize_surprise(signal)
         
         assert agent.metabolic_cost > initial_cost
@@ -374,7 +374,7 @@ class TestActiveInferenceBiological:
         agent_tired = ActiveInferenceAgent(prior_precision=10.0)
         agent_tired.metabolic_cost = 9.0 # Extreme fatigue (div by 10)
         
-        signal = np.zeros(13) # Perfect prediction -> High Precision
+        signal = np.zeros(18) # Perfect prediction -> High Precision
         
         s1 = agent_fresh.minimize_surprise(signal)
         s2 = agent_tired.minimize_surprise(signal)
