@@ -10,10 +10,10 @@
 Shunollo provides a pure, agnostic physics layer for translating any data stream into sensory qualia - enabling AI systems to "feel" their environment through entropy, roughness, viscosity, and other universal metrics.
 
 > [!IMPORTANT]
-> **Status**: Production Ready (v0.3.7)
-> *   **Physics**: Tiered (Mechanics, Thermo, Quantum, Optics)
+> **Status**: Production Ready (v0.3.8)
+> *   **Physics**: Modular (Thermodynamics, Quantum, Optics, Mechanics)
 > *   **Integrity**: 228 Tests (Unit, Integration, Functional, Performance)
-> *   **Intelligence**: Active Inference + DDM select-action loop
+> *   **Performance**: Sub-millisecond latency (<0.1ms)
 > *   **Safety**: Verified (Refractory Period, Thermal Limits)
 
 ## 100% Open Source
@@ -32,7 +32,7 @@ Transform any data stream into a normalized physics fingerprint:
 - **Time Series**: Volatility, Lyapunov Exponents, Poisson Detection
 - **High-Order**: Dissonance, Hamiltonian, Lagrangian Action
 
-### Physics-RAG (v0.3.7) 🆕
+### Physics-RAG (Integrated v0.3.8) 🆕
 **Retrieval-Augmented Generation for Sensation** - your AI remembers what it has "felt" before:
 
 ```python
