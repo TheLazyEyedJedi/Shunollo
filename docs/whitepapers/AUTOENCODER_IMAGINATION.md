@@ -10,7 +10,7 @@ Supervised learning requires labeled data. But how do you label something you've
 An Autoencoder is a neural network that learns to compress and reconstruct its input.
 
 ```
-Input (13-dim) -> [Encoder] -> Latent (4-dim) -> [Decoder] -> Output (13-dim)
+Input (18-dim) -> [Encoder] -> Latent (6-dim) -> [Decoder] -> Output (18-dim)
 ```
 
 If the network is trained **only on normal data**, it learns the "structure of normality."

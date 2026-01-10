@@ -53,7 +53,7 @@ Shunollo translates any data stream into an **18-dimensional physics fingerprint
 
 ---
 
-## Memory Senses (NEW in v0.2.0) 🆕
+## Memory Senses (Integrated in v0.3.7) 🆕
 
 ### 7. Déjà Vu (Episodic Recall)
 *   **Metric**: Euclidean distance to nearest stored episode.

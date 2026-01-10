@@ -10,13 +10,13 @@ Bio-Isomorphism:
 - If the brain cannot "imagine" the packet (based on what it knows is normal), it is alien.
 
 Architecture:
-Input (13) -> Encoder (10) -> Latent (5) -> Decoder (10) -> Output (13)
+Input (18) -> Encoder (12) -> Latent (6) -> Decoder (12) -> Output (18)
 """
 import numpy as np
 import os
 
 class Autoencoder:
-    def __init__(self, input_size: int = 13, hidden_size: int = 8, latent_size: int = 4):
+    def __init__(self, input_size: int = 18, hidden_size: int = 12, latent_size: int = 6):
         self.input_size = input_size
         self.learning_rate = 0.05 # Increased learning rate for faster convergence
         

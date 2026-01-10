@@ -55,7 +55,7 @@ python -m pytest tests/test_advanced_physics.py
 
 ## 4. Key Validation Areas
 
-### 4.1 Advanced Physics (Phase 500)
+### 4.1 Advanced Physics (v0.3.7)
 Verified in `test_advanced_physics.py`:
 *   **Stevens' Power Law**: Confirms that 5% signal increase $\neq$ 5% sensation increase. (e.g., Pain scales exponentially).
 *   **Vestibular Dynamics**: Confirms that rapid acceleration inputs integrate into a sustained "velocity" state (simulating dizziness/alertness).
@@ -86,10 +86,10 @@ When adding a new physics module (e.g., `NewForce.py`):
 
 ---
 
-## 6. Current Status (v0.3.1)
+## 6. Current Status (v0.3.7)
 
-*   **Total Tests**: 223
+*   **Total Tests**: 228
 *   **Result**: 100% Passing
-*   **Known Flaky Tests**: None (Fixed in Phase 3).
+*   **Known Flaky Tests**: None.
 
 *Authorized by Shunollo Core Team.*

@@ -13,7 +13,7 @@ Shunollo maximizes efficiency by using a **Hybrid Architecture**:
 
 | Neural Component | Shunollo Component | Role | Logic |
 | :--- | :--- | :--- | :--- |
-| **Input Layer** | **Physics Engine** | Vectorization | 13-dim Vector (Energy, Roughness...) |
+| **Input Layer** | **Physics Engine** | Vectorization | 18-dim Vector (Energy, Roughness...) |
 | **Hidden Layer** | **Reservoir (ESN)** | Temporal Memory | `tanh(W_in*u + W*x)` (Liquid State) |
 | **Bottleneck** | **Autoencoder** | Compression | `z = Encoder(x)` (Latent Space) |
 | **Output Layer** | **Cortex** | Classification | `y = W_out * x` (Readout) |
@@ -22,7 +22,7 @@ Shunollo maximizes efficiency by using a **Hybrid Architecture**:
 ```mermaid
 graph TD
     A[Raw Signal] -->|Transducer| B(Physics Engine)
-    B -->|13-dim Vector| C{Distributor}
+    B -->|18-dim Vector| C{Distributor}
     
     subgraph The Brain
     C -->|Stream| D[Reservoir Liquid Memory]
@@ -108,8 +108,8 @@ $$VETO \iff (\Delta W > 0.3) \lor (\bar{W} < 0.1)$$
 *   **Lobotomy**: System average trust cannot drop below 10%.
 
 
-## 6. The Physics of Perception (Phase 500)
-**Added**: 2026-01-09
+## 6. The Physics of Perception
+**Verified**: 2026-01-09 (v0.3.7)
 
 To act as a "Universal Sensor Translator," Shunollo implements advanced psychophysics and biophysics models to translate raw data into biologically plausible qualia.
 
@@ -145,7 +145,7 @@ Biological tissue fails due to **Distortion** (shape change), not **Hydrostatic 
 
 $$\sigma_v = \sqrt{\frac{(\sigma_1 - \sigma_2)^2 + (\sigma_2 - \sigma_3)^2 + (\sigma_3 - \sigma_1)^2}{2}}$$
 
-## 7. Phase 2 Biophysics: Transduction Physics (Added 2026-01-09)
+## 7. Transduction Physics (v0.3.7 Stability Update)
 
 Based on "The Physics of Transduction" document, we implement the remaining sensor physics to complete the universal translator.
 

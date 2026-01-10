@@ -31,7 +31,7 @@ This document maps Shunollo's code to biological brain structures.
 *   **Shunollo**: Filters out background noise so the Brain isn't overwhelmed.
 *   **Logic**: Low-salience signals are dropped. High-salience signals are promoted.
 
-### 2.2 Hippocampus (NEW in v0.2.0) 🆕
+### 2.2 Hippocampus (Integrated in v0.3.7) 🆕
 *   **Human**: Consolidates short-term memory to long-term. Enables "Déjà Vu."
 *   **Shunollo**: Stores sensory episodes as 18-dim physics vectors. Enables similarity search.
 *   **Logic**: `recall_similar()` queries past experiences. `get_novelty_score()` measures surprise.

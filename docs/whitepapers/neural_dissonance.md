@@ -11,7 +11,7 @@ Shunollo computes a **Dissonance Score** by measuring the *disagreement* between
 
 $$D = \sigma(\text{SensoryVector})$$
 
-Where $\sigma$ is the standard deviation across the 13-dimensional somatic vector.
+Where $\sigma$ is the standard deviation across the 18-dimensional somatic vector.
 
 ### Interpretation
 1.  **Low Dissonance ($D \approx 0$)**: All senses agree. The signal is coherent. Either "all normal" or "all anomalous."

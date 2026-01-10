@@ -41,7 +41,7 @@ This folder contains 4 "Bare Bones" examples demonstrating how to apply Shunollo
 *   **Result**: As bearings degrade, they introduce "Grit" (High Frequency Roughness). Shunollo detects this textual change long before the motor overheats.
 *   **Run**: `python examples/motor_decay.py`
 
-## 5. Universal Sensor Translator (`universal_sensor.py`) 🆕 (Phase 500)
+## 5. Universal Sensor Translator (`universal_sensor.py`) 🆕 (v0.3.7)
 **Goal**: Demonstrate how **ANY** data source can be bolted onto Shunollo.
 *   **Physics Mapping**:
     *   **Stevens' Power Law**: Perceptual scaling (e.g. Pain exponent for Errors).
@@ -63,7 +63,7 @@ This proves that **Code is Anatomy**. The same mathematical structures that prot
 
 ---
 
-## Physics-RAG: Memory-Augmented Detection (NEW in v0.2.0) 🆕
+## Physics-RAG: Memory-Augmented Detection (Integrated in v0.3.7) 🆕
 
 All examples can now leverage **episodic memory** for One-Shot Learning:
 
