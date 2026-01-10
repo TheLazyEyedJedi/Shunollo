@@ -51,6 +51,10 @@ class Autoencoder:
         """
         if x.ndim == 1: x = x.reshape(-1, 1)
         
+        # Input validation: Replace NaN/Inf with zeros for numerical stability
+        if np.any(~np.isfinite(x)):
+            x = np.nan_to_num(x, nan=0.0, posinf=0.0, neginf=0.0)
+        
         # Encoder
         self.z1 = np.dot(self.W_enc1, x) + self.b_enc1
         self.a1 = np.tanh(self.z1)

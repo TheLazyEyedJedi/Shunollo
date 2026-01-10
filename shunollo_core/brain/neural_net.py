@@ -16,9 +16,9 @@ from typing import Tuple, Optional
 class LinearAssociativeMemory:
     """
     A simple specialized neural associative memory.
-    Maps an Input Vector (13-dim Sensation) -> Output Scalar (Anomaly Probability).
+    Maps an Input Vector (18-dim Sensation) -> Output Scalar (Anomaly Probability).
     """
-    def __init__(self, input_size: int = 13, reservoir_size: int = 100, spectral_radius: float = 0.9):
+    def __init__(self, input_size: int = 18, reservoir_size: int = 100, spectral_radius: float = 0.9):
         self.input_size = input_size
         self.reservoir_size = reservoir_size
         self.learning_rate = 0.05 # Faster learning with better separation
@@ -51,11 +51,15 @@ class LinearAssociativeMemory:
     def forward(self, u: np.ndarray) -> dict:
         """
         Forward pass (Intuition).
-        u: Input vector (shape [13] or [13, 1])
+        u: Input vector (shape [18] or [18, 1])
         Returns: Dict containing 'classification_score' (0.0-1.0) and 'anomaly_score' (Reconstruction error or similar)
         """
         if u.ndim == 1:
             u = u.reshape(-1, 1)
+        
+        # Input validation: Replace NaN/Inf with zeros for numerical stability
+        if np.any(~np.isfinite(u)):
+            u = np.nan_to_num(u, nan=0.0, posinf=0.0, neginf=0.0)
             
         # 1. Update Reservoir State (Recurrent Dynamics)
         # x(t) = tanh(W_in * u(t) + W_res * x(t-1) + W_bias)

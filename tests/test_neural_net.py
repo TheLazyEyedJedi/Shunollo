@@ -19,7 +19,7 @@ class TestNeuroSymbolic:
     def test_reservoir_initialization(self):
         """Verify the brain initializes with correct matrix dimensions."""
         brain = LinearAssociativeMemory()
-        assert brain.W_in.shape == (100, 13)
+        assert brain.W_in.shape == (100, 18)
         assert brain.W_res.shape == (100, 100)
         assert brain.W_out.shape == (1, 100)
         
@@ -27,9 +27,9 @@ class TestNeuroSymbolic:
         """Verify the brain can learn to distinguish patterns."""
         brain = get_brain(reset=True)
         
-        # 1. Create Patterns (13-dim)
-        white_vec = [0.1] * 10 + [1.0, 0.0, 0.0]
-        red_vec = [0.9] * 10 + [0.0, 1.0, 0.0]
+        # 1. Create Patterns (18-dim)
+        white_vec = [0.1] * 15 + [1.0, 0.0, 0.0]
+        red_vec = [0.9] * 15 + [0.0, 1.0, 0.0]
         
         # 3. Train
         for _ in range(50):
@@ -50,14 +50,14 @@ class TestNeuroSymbolic:
         """Verify the brain generalizes to unseen data."""
         brain = get_brain(reset=True)
         
-        vec_a = [0.1] * 13
-        vec_b = [0.9] * 13
+        vec_a = [0.1] * 18
+        vec_b = [0.9] * 18
         
         brain.train(np.array(vec_a), 0.0)
         brain.train(np.array(vec_b), 1.0)
         
         # Test vector in between
-        vec_mid = [0.5] * 13
+        vec_mid = [0.5] * 18
         res = brain.forward(np.array(vec_mid))
         pred = res["classification_score"]
         

@@ -6,7 +6,7 @@ import time
 import uuid
 import statistics
 import json
-from collections import defaultdict, Counter
+from collections import defaultdict, Counter, deque
 from typing import Dict, Any, List, Optional
 
 class PerceptualClusterer:
@@ -14,11 +14,13 @@ class PerceptualClusterer:
     SILENCE_TIMEOUT = 5.0
     # 60 seconds max duration before forcing a split (keep clusters focused)
     MAX_DURATION = 60.0
+    # Maximum closed clusters to retain in memory
+    MAX_CLOSED_CLUSTERS = 1000
 
     def __init__(self):
         # Key: (src, dst) -> { "events": [], "start_ts": float, "last_ts": float, "id": str }
         self.active_clusters: Dict[tuple, Dict[str, Any]] = {}
-        self.closed_clusters: List[Dict[str, Any]] = []
+        self.closed_clusters: deque = deque(maxlen=self.MAX_CLOSED_CLUSTERS)
 
     def add_event(self, event: Dict[str, Any]) -> None:
         """
