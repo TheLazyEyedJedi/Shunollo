@@ -3,7 +3,7 @@
 ## I. THE CORE PHILOSOPHY
 **"We are not building a logging tool; we are building a synthetic organism."**
 
-The Shunollo Platform is a cognitive observability system modeled after biological homeostasis. We have achieved **Architecture 2.0**, moving from monolithic sensing to a **Decentralized Synaptic Bus**.
+The Shunollo Platform is a cognitive observability system modeled after biological homeostasis. We have achieved **Architecture 3.0** (v0.3.8), utilizing a **Modular Physics Core** and **Decentralized Synaptic Bus**.
 
 ### The "Synaptic Stack" (Decentralized)
 ```mermaid
