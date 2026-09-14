@@ -84,6 +84,9 @@ graph LR
     D & E --> F[Decision]
 ```
 
+> [!IMPORTANT]
+> This repository contains later engine work that must be reconciled with the standalone Core extraction. Read [Core Reconciliation](docs/CORE_RECONCILIATION.md) before moving or consolidating components.
+
 ## Installation
 
 ```bash
