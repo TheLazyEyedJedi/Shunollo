@@ -22,7 +22,13 @@ def main():
             assert len(rows) == 2
             assert len(rows[0]["payload"]["vector"]) == 18
             assert rows[1]["payload"] == {"ticket_id": "example"}
-    print("Installed signal model and runtime audit persistence: PASS")
+    from shunollo_core.perception.meta_gene_layer import TraitMemory, summary
+    assert summary("new-host")["top_traits"] == []
+    first, second = TraitMemory(), TraitMemory()
+    first.reconstruct_state({"observer": {"warm_bright": {"count": 3}}})
+    assert first.trait_profile("observer") == {"warm": 3, "bright": 3}
+    assert second.trait_profile("observer") == {}
+    print("Installed signal model, audit persistence and isolated trait reconstruction: PASS")
 
 
 if __name__ == "__main__":
