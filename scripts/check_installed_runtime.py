@@ -34,6 +34,22 @@ def main():
     signal = scalar.ingest(4, 1002)
     assert signal.frequency == 0.5 and len(signal.to_vector()) == 18
     assert signal.metadata['mapping_version'] == 'scalar-v2'
+    import numpy as np
+    from shunollo_core.brain.autoencoder import Autoencoder
+    from shunollo_core.brain.neural_net import LinearAssociativeMemory
+    imagination = Autoencoder()
+    sample = np.zeros(18)
+    sample[0] = np.nan
+    imagination.train_on_normal(sample)
+    assert np.isfinite(imagination.calculate_anomaly_score(sample))
+    with tempfile.TemporaryDirectory() as directory:
+        brain = LinearAssociativeMemory(input_size=4, reservoir_size=8)
+        path = Path(directory) / 'brain'
+        brain.save(path)
+        restored = LinearAssociativeMemory()
+        restored.load(path)
+        restored.reset()
+        assert restored.forward(np.zeros(4))['classification_score'] == .5
     print("Installed signal model, audit persistence and isolated trait reconstruction: PASS")
 
 

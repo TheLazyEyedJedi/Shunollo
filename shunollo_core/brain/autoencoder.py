@@ -14,6 +14,7 @@ Input (18) -> Encoder (12) -> Latent (6) -> Decoder (12) -> Output (18)
 """
 import numpy as np
 import os
+from .validation import sample_column, validated_arrays
 
 class Autoencoder:
     def __init__(self, input_size: int = 18, hidden_size: int = 12, latent_size: int = 6):
@@ -21,20 +22,20 @@ class Autoencoder:
         self.learning_rate = 0.05 # Increased learning rate for faster convergence
         
         # Xavier/He-like Initialization (Better variance handling)
-        np.random.seed(42)
+        rng = np.random.RandomState(42)
         scale1 = np.sqrt(2.0 / (input_size + hidden_size))
-        self.W_enc1 = np.random.randn(hidden_size, input_size) * scale1
+        self.W_enc1 = rng.randn(hidden_size, input_size) * scale1
         self.b_enc1 = np.zeros((hidden_size, 1))
         
         scale2 = np.sqrt(2.0 / (hidden_size + latent_size))
-        self.W_enc2 = np.random.randn(latent_size, hidden_size) * scale2
+        self.W_enc2 = rng.randn(latent_size, hidden_size) * scale2
         self.b_enc2 = np.zeros((latent_size, 1))
         
         # Decoder Weights
-        self.W_dec1 = np.random.randn(hidden_size, latent_size) * scale2
+        self.W_dec1 = rng.randn(hidden_size, latent_size) * scale2
         self.b_dec1 = np.zeros((hidden_size, 1))
         
-        self.W_dec2 = np.random.randn(input_size, hidden_size) * scale1
+        self.W_dec2 = rng.randn(input_size, hidden_size) * scale1
         self.b_dec2 = np.zeros((input_size, 1))
 
     def _sigmoid(self, x):
@@ -49,12 +50,8 @@ class Autoencoder:
         Pass x through Encoder -> Latent -> Decoder.
         Returns: (reconstruction, latent_vector)
         """
-        if x.ndim == 1: x = x.reshape(-1, 1)
-        
-        # Input validation: Replace NaN/Inf with zeros for numerical stability
-        if np.any(~np.isfinite(x)):
-            x = np.nan_to_num(x, nan=0.0, posinf=0.0, neginf=0.0)
-        
+        x = sample_column(x, self.input_size)
+
         # Encoder
         self.z1 = np.dot(self.W_enc1, x) + self.b_enc1
         self.a1 = np.tanh(self.z1)
@@ -77,8 +74,8 @@ class Autoencoder:
         Returns Mean Squared Error between Input and Reconstruction.
         High Error = Anomaly.
         """
+        x = sample_column(x, self.input_size)
         recon, _ = self.forward(x)
-        if x.ndim == 1: x = x.reshape(-1, 1)
         loss = np.mean((x - recon) ** 2)
         return float(loss)
 
@@ -87,8 +84,8 @@ class Autoencoder:
         Train the Autoencoder to reconstruct this 'Normal' sample.
         Simple Backpropagation (SGD).
         """
+        x = sample_column(x, self.input_size)
         recon, _ = self.forward(x)
-        if x.ndim == 1: x = x.reshape(-1, 1)
         
         # 1. Output Layer Error (MSE Gradient)
         # dL/dy = (y_hat - y) * sigmoid_derivative
@@ -141,23 +138,26 @@ class Autoencoder:
         """
         Secure Load using Numpy Zip (No Pickle).
         """
+        path = os.fspath(path)
         if not path.endswith(".npz"):
             path += ".npz"
-            
-        if not os.path.exists(path): return
-        
-        try:
-            with np.load(path) as data:
-                self.W_enc1 = data["W_enc1"]
-                self.b_enc1 = data["b_enc1"]
-                self.W_enc2 = data["W_enc2"]
-                self.b_enc2 = data["b_enc2"]
-                self.W_dec1 = data["W_dec1"]
-                self.b_dec1 = data["b_dec1"]
-                self.W_dec2 = data["W_dec2"]
-                self.b_dec2 = data["b_dec2"]
-        except Exception as e:
-            print(f"Error loading Imagination state from {path}: {e}")
+        if not os.path.exists(path):
+            return
+        # Stage and validate the complete checkpoint before changing the model.
+        with np.load(path, allow_pickle=False) as data:
+            first = data["W_enc1"]
+            second = data["W_enc2"]
+            if first.ndim != 2 or second.ndim != 2:
+                raise ValueError("invalid encoder dimensions")
+            hidden, inputs = first.shape
+            latent, _ = second.shape
+            shapes = dict(W_enc1=(hidden, inputs), b_enc1=(hidden, 1),
+                          W_enc2=(latent, hidden), b_enc2=(latent, 1),
+                          W_dec1=(hidden, latent), b_dec1=(hidden, 1),
+                          W_dec2=(inputs, hidden), b_dec2=(inputs, 1))
+            arrays = validated_arrays(data, shapes)
+        self.__dict__.update(arrays)
+        self.input_size = inputs
 
 # Global "Imagination"
 _imagination = Autoencoder()

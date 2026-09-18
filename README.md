@@ -149,3 +149,5 @@ We welcome research contributions. Please see [CONTRIBUTING.md](CONTRIBUTING.md)
 ### Scalar stream compatibility
 
 See [Scalar stream contract and unreleased repair](docs/SCALAR_STREAM_CONTRACT.md) before using the historical generic transducer. It records the public signal contract, temporal measurements and release boundary.
+
+See [pre-release review](docs/PRE_RELEASE_REVIEW.md) for neural safety repairs, compatibility changes, validation and remaining limits.
