@@ -1,3 +1,15 @@
+# Shunollo 0.3.11
+
+Release candidate. This patch restores symbolic trait reconstruction using explicit host-supplied count snapshots and independent `TraitMemory` instances. It removes the missing legacy-memory import, validates reconstruction atomically, and preserves the existing module-level API for in-memory use. Hosts own persistence and the selection of historical counts; learned weights are not counts.
+
+The distribution includes the already-merged runtime audit middleware and its separate `shunollo_runtime` namespace. The release does not claim calibrated security accuracy, improved detection speed, or production readiness.
+
+Validation before tagging: full tests across Python 3.10–3.12; clean installed-wheel signal, runtime-audit and trait checks; consuming application's actual wheel, browser, persistence and migration tests. See `docs/TRAIT_RECONSTRUCTION.md` for host integration requirements.
+
+---
+
+## Historical release notes (claims retained as historical, not revalidated here)
+
 # Shunollo v0.3.9 Release Notes
 v0.3.7: "Stable Release"
 
