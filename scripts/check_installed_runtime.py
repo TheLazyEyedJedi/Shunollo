@@ -28,6 +28,12 @@ def main():
     first.reconstruct_state({"observer": {"warm_bright": {"count": 3}}})
     assert first.trait_profile("observer") == {"warm": 3, "bright": 3}
     assert second.trait_profile("observer") == {}
+    from shunollo_core.perception.generic_transducer import ScalarTransducer
+    scalar = ScalarTransducer('installed', value_scale=10)
+    scalar.ingest(2, 1000)
+    signal = scalar.ingest(4, 1002)
+    assert signal.frequency == 0.5 and len(signal.to_vector()) == 18
+    assert signal.metadata['mapping_version'] == 'scalar-v2'
     print("Installed signal model, audit persistence and isolated trait reconstruction: PASS")
 
 

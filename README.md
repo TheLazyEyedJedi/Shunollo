@@ -145,3 +145,7 @@ Apache 2.0 - See [LICENSE](LICENSE)
 We welcome research contributions. Please see [CONTRIBUTING.md](CONTRIBUTING.md) for architectural rules and setup instructions.
 
 > **Note**: By contributing, you agree to our [Contributor License Agreement](.github/CLA.md).
+
+### Scalar stream compatibility
+
+See [Scalar stream contract and unreleased repair](docs/SCALAR_STREAM_CONTRACT.md) before using the historical generic transducer. It records the public signal contract, temporal measurements and release boundary.

@@ -142,7 +142,7 @@ def query_neural_intuition(physics_vector: list) -> dict:
     recon_error = imagination.calculate_anomaly_score(u)
     
     return {
-        "classification_score": class_score,
+        "classification_score": float(class_score["classification_score"]),
         "anomaly_score": min(1.0, recon_error) # Raw MSE (0.0-1.0)
     }
 
