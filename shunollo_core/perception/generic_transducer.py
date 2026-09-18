@@ -1,162 +1,86 @@
-"""
-generic_transducer.py - The Generic Sensory Interface
------------------------------------------------------
-Transforms arbitrary scalar data streams (Financial, IoT, Hardware) into 
-Shunollo Sensory Experience using the Physics Engine.
+"""Bounded scalar-stream adapter for the public ShunolloSignal interface.
 
-This proves the 'Cognitive Physics' concept:
-Input:  [Bitcoin Price] -> [Physics Engine] -> [High Temperature/Roughness] -> [Sensation]
-Output: {sound: {timbre: 'noise'}, light: {hue: 0, brightness: 255}}
+Mapping v2 replaces the removed SensoryInput/SensoryPhysics APIs. Input units
+are caller-defined; value_scale fixes normalization without fitting on future
+samples. This adapter measures stream properties, not domain-specific threats.
 """
-
 from collections import deque
-from datetime import datetime
-from typing import Dict, Any, List
+from datetime import datetime, timezone
+import math
 import time
 
-from shunollo_core.models import SensoryInput
-from shunollo_core.physics import SensoryPhysics as Phys
+import numpy as np
 
-class ScalarTransducer:
-    """
-    A stateful transducer for a single scalar value stream.
-    Maintains a rolling window to calculate time-domain physics.
-    """
-    
-    def __init__(self, name: str, window_size: int = 50):
-        self.name = name
-        self.window_size = window_size
-        self.value_buffer: deque = deque(maxlen=window_size)
-        self.time_buffer: deque = deque(maxlen=window_size)
-        
-    def ingest(self, value: float, timestamp: float = None) -> SensoryInput:
-        """
-        Ingest a scalar value and produce a Sensation.
-        """
-        if timestamp is None:
-            timestamp = time.time()
-            
-        self.value_buffer.append(value)
-        self.time_buffer.append(timestamp)
-        
-        # 1. Calculate Physics
-        physics_profile = self._calculate_physics()
-        
-        # 2. Map to Sensation (Sound/Light)
-        sensation = self._map_physics_to_sensation(physics_profile, value)
-        
-        return SensoryInput(
-            input_type=f"scalar_{self.name}",
-            timestamp=datetime.fromtimestamp(timestamp),
-            metadata=sensation
-        )
+from shunollo_core.interfaces import BaseTransducer
+from shunollo_core.models import ShunolloSignal
+from shunollo_core import physics
+from shunollo_core.perception.auditory_cortex import AuditoryCortex
 
-    def _calculate_physics(self) -> Dict[str, float]:
-        """Apply the Master Sensory Codex to the buffer."""
-        values = list(self.value_buffer)
-        times = list(self.time_buffer)
-        
-        if not values: return {}
-        
-        # Energy
-        energy = Phys.Energy.magnitude_rms(values)
-        peak = Phys.Energy.peak_impulse(values)
-        
-        # Time
-        tempo = Phys.Time.tempo_hz(times)
-        
-        # Entropy (Normalize values for Shannon? Or just use Kurtosis/Fractal)
-        # For Shannon, we need distribution buckets. Let's use Kurtosis/Fractal for raw scalars.
-        roughness = Phys.Entropy.fractal_dimension(values)
-        snap = Phys.Entropy.kurtosis(values)
-        
-        # Quality
-        jitter = Phys.Quality.micro_jitter(times)
-        
-        # State
-        # Flow resistance requires Latency, not Value. 
-        # For a Scalar stream, 'Flow' might be mapped to Rate of Change (Volatility)
-        # Volatility = First Derivative of Amplitude
-        volatility = 0.0
-        if len(values) >= 2:
-            volatility = abs(values[-1] - values[-2])
-            
-        return {
-            "energy": energy,
-            "peak": peak,
-            "tempo": tempo,
-            "roughness": roughness,
-            "snap": snap,
-            "jitter": jitter,
-            "volatility": volatility
-        }
 
-    def _map_physics_to_sensation(self, physics: Dict[str, float], current_value: float) -> Dict[str, Any]:
-        """
-        The 'Synesthesia' Layer: Physics -> Art.
-        """
-        # --- SOUND ---
-        # Roughness (Fractal) -> Timbre/Harmonicity
-        # 1.0 (smooth) -> Pure Sine
-        # 1.5+ (rough) -> Noise/FM
-        fd = physics.get("roughness", 1.0)
-        
-        if fd < 1.1:
-            timbre = "sine"
-            fm_mod = 0.0
-        elif fd < 1.3:
-            timbre = "triangle"
-            fm_mod = 0.5
-        elif fd < 1.6:
-            timbre = "sawtooth"
-            fm_mod = 5.0
-        else:
-            timbre = "square" # Harsh
-            fm_mod = 20.0 # Metallic noise
-            
-        # Volatility -> Pitch Modulation (Vibrato?)
-        # For now, let's map Value -> Pitch directly (High price = High pitch)
-        # Normalize assuming 0-100 range for demo, or dynamic scaling
-        pitch = 200 + (current_value * 10) # 10.0 -> 300Hz
-        
-        # Snap (Kurtosis) -> Transient (Volume spike)
-        snap = physics.get("snap", 0.0)
-        volume = max(0.2, min(1.0, 0.5 + (snap / 10.0)))
+class ScalarTransducer(BaseTransducer):
+    mapping_version = 'scalar-v2'
 
-        sound = {
-            "pitch": int(pitch),
-            "volume": float(volume),
-            "timbre": timbre,
-            "fm_modulation": float(fm_mod),
-            "duration": 0.2
-        }
+    def __init__(self, name: str, window_size: int = 50, *, value_scale: float = 100.0,
+                 flux_scale: float = 1.0):
+        if not isinstance(name, str) or not name.strip():
+            raise ValueError('name must be a nonempty string')
+        if type(window_size) is not int or not 2 <= window_size <= 4096:
+            raise ValueError('window_size must be an integer in [2, 4096]')
+        for value in (value_scale, flux_scale):
+            if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or value <= 0:
+                raise ValueError('normalization scales must be finite and positive')
+        self.name, self.window_size = name, window_size
+        self.value_scale, self.flux_scale = float(value_scale), float(flux_scale)
+        self.value_buffer = deque(maxlen=window_size)
+        self.time_buffer = deque(maxlen=window_size)
+        self._auditory = AuditoryCortex()
 
-        # --- LIGHT ---
-        # Energy -> Brightness
-        brightness = int(min(255, physics.get("energy", 0) * 10))
-        
-        # Jitter -> Strobe (Pulse Rate)
-        jitter = physics.get("jitter", 0)
-        pulse = 1
-        if jitter > 0.1: pulse = 5 # Strobe on unstable timing
-        if jitter > 0.5: pulse = 10
-        
-        # Temperature (proxied by Roughness/Volatility) -> Hue
-        # Smooth/Stable = Blue (240). Rough/Volatile = Red (0).
-        heat_score = (fd - 1.0) * 2.0 # 1.0->0, 1.5->1.0
-        heat_score = max(0.0, min(1.0, heat_score))
-        
-        hue = int(240 * (1.0 - heat_score)) # 240 (Blue) -> 0 (Red)
-        
-        light = {
-            "hue": hue,
-            "brightness": brightness,
-            "saturation": 1.0,
-            "pulse_rate": pulse
-        }
-        
-        return {
-            "sound": sound, 
-            "light": light, 
-            "physics": physics # Expose raw physics for Agents
-        }
+    def reset(self):
+        self.value_buffer.clear()
+        self.time_buffer.clear()
+
+    def ingest(self, value: float, timestamp: float = None) -> ShunolloSignal:
+        timestamp = time.time() if timestamp is None else timestamp
+        for item in (value, timestamp):
+            if isinstance(item, bool) or not isinstance(item, (int, float)) or not math.isfinite(item):
+                raise ValueError('value and timestamp must be finite numbers')
+        if self.time_buffer and timestamp - self.time_buffer[-1] < 1e-6:
+            raise ValueError('timestamps must increase by at least one microsecond; reset for a new stream')
+        try:
+            observed_at = datetime.fromtimestamp(timestamp, timezone.utc)
+        except (ValueError, OverflowError, OSError) as exc:
+            raise ValueError('timestamp is outside the supported datetime range') from exc
+        # Validation precedes state mutation. Raw finite values are kept for callers.
+        self.value_buffer.append(float(value))
+        self.time_buffer.append(float(timestamp))
+        values = np.clip(np.asarray(self.value_buffer), -self.value_scale, self.value_scale) / self.value_scale
+        times = np.asarray(self.time_buffer)
+        deltas = np.diff(times)
+        entropy = physics.calculate_entropy(values)
+        energy = float(np.sqrt(np.mean(values * values)))
+        tempo = float((len(times)-1)/(times[-1]-times[0])) if len(times)>1 else 0.
+        jitter = float(np.std(deltas)) if len(deltas)>1 else 0.
+        cv = jitter/float(np.mean(deltas)) if len(deltas)>1 else 0.
+        derivative = abs(float(values[-1]-values[-2]))/float(deltas[-1]) if len(deltas) else 0.
+        # All arithmetic uses bounded values; normalize before applying Core flux.
+        normalized_flux = min(1., derivative / self.flux_scale)
+        signal = ShunolloSignal(input_type='scalar_'+self.name, timestamp=observed_at,
+            energy=energy, entropy=entropy, frequency=tempo,
+            roughness=float(physics.calculate_roughness(entropy,jitter=jitter*1000)),
+            volatility=float(np.std(values)), harmony=1./(1.+cv),
+            flux=float(physics.calculate_flux(normalized_flux,limit=1.)))
+        sound = self._auditory.process_sound(signal)
+        # Core's renderer expects hue in degrees. Use a consistent 0..1 signal
+        # hue so ShunolloSignal.to_vector() does not saturate all colored inputs.
+        signal.hue = (240./360.) * (1.-signal.roughness)
+        signal.saturation = 1.
+        profile = dict(energy=energy, peak=float(np.max(np.abs(values))), tempo=tempo,
+                       roughness=signal.roughness, jitter_seconds=jitter,
+                       volatility=signal.volatility, absolute_derivative=derivative, flux=signal.flux)
+        signal.metadata = dict(raw_value=float(value),mapping_version=self.mapping_version,
+            sample_count=len(values), temporal_available=len(values)>1,
+            normalization={'value_scale':self.value_scale,'flux_scale':self.flux_scale,
+                           'clipped_samples':sum(abs(v)>self.value_scale for v in self.value_buffer)},
+            physics=profile, sound=sound,
+            light={'hue':signal.hue*360,'saturation':signal.saturation,'brightness':energy*255})
+        return signal
