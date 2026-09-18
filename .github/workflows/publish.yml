@@ -27,6 +27,14 @@ jobs:
       - name: Build package
         run: python -m build
 
+      - name: Verify release tag and distribution
+        run: |
+          python -c 'import os,tomllib; v=tomllib.load(open("pyproject.toml","rb"))["project"]["version"]; assert os.environ["GITHUB_REF_NAME"] == "v" + v, "Release tag must match package version"'
+          python -m twine check dist/*
+          python -m venv "${RUNNER_TEMP}/release-wheel-check"
+          "${RUNNER_TEMP}/release-wheel-check/bin/python" -m pip install dist/*.whl
+          "${RUNNER_TEMP}/release-wheel-check/bin/python" -I scripts/check_installed_runtime.py
+
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         # Uses trusted publishing - configure at pypi.org
