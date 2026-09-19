@@ -12,6 +12,9 @@ Features:
 import json
 import random
 import os
+import math
+from collections import deque
+from shunollo_core.perception.encoding import validate_vector
 from pathlib import Path
 from datetime import datetime
 from typing import List, Generator, Tuple, Optional
@@ -49,6 +52,8 @@ class Hippocampus:
     DEFAULT_THRESHOLD = 1.0
     
     def __init__(self, max_cache_size: int = 10000):
+        if type(max_cache_size) is not int or max_cache_size < 1:
+            raise ValueError('max_cache_size must be a positive integer')
         self.storage_path = Path(config.storage["cache_dir"]) / "episodic_memory.jsonl"
         self.storage_path.parent.mkdir(parents=True, exist_ok=True)
         
@@ -67,11 +72,8 @@ class Hippocampus:
             self._cache_dirty = False
             return self._cache
         
-        lines = self.storage_path.read_text(encoding="utf-8").splitlines()
-        
-        # Limit to most recent entries if cache is too large
-        if len(lines) > self._max_cache_size:
-            lines = lines[-self._max_cache_size:]
+        with self.storage_path.open(encoding='utf-8') as source:
+            lines = deque(source, maxlen=self._max_cache_size)
         
         for line in lines:
             try:
@@ -150,8 +152,15 @@ class Hippocampus:
         Returns:
             List of (ShunolloSignal, distance) tuples, sorted by similarity (closest first).
         """
+        query_vector = validate_vector(query_vector)
+        if type(k) is not int or k < 0:
+            raise ValueError('k must be a nonnegative integer')
         if threshold is None:
             threshold = self.DEFAULT_THRESHOLD
+        if isinstance(threshold, bool) or not isinstance(threshold, (int, float)) or math.isnan(threshold) or threshold < 0:
+            raise ValueError('threshold must be nonnegative, not NaN')
+        if k == 0:
+            return []
             
         cache = self._load_cache()
         if not cache:

@@ -13,6 +13,7 @@ In‑memory adaptive weight table mapping ``(agent, codon) -> weight``.
 from __future__ import annotations
 
 import json
+import math
 from collections import defaultdict
 from pathlib import Path
 from typing import Dict, List
@@ -29,28 +30,35 @@ _DECAY = 0.99      # weight decay per tick
 _MIN_W, _MAX_W = 0.0, 5.0
 
 # ------------------------------------------------------------------ #
-def update_weights(agent: str, codons: List[str], reward: float) -> None:
+def update_weights(agent: str, codons: List[str], reward: float, *, memory=None) -> None:
     """
     Blend ``reward`` into each codon’s weight for *agent*.
 
     Positive reward pushes weight up, negative pushes down.
     """  # noqa: E501
+    if memory is None:
+        raise ValueError('An explicit host memory adapter is required')
+    if not isinstance(agent, str) or not agent or not codons or any(not isinstance(c, str) or not c for c in codons):
+        raise ValueError('Named agent and nonempty codon strings required')
+    if isinstance(reward, bool) or not isinstance(reward, (int, float)) or not math.isfinite(reward):
+        raise ValueError('Finite reward required')
+    feedback_tag = 'positive' if reward > 0 else 'negative' if reward < 0 else None
+    if feedback_tag:
+        record_codon_feedback(agent, codons, score=reward, memory=memory, feedback=feedback_tag)
     mem = _weights[agent]
     for codon in codons:
         old = mem.get(codon, 1.0)
         new = max(_MIN_W, min(_MAX_W, old * (1 - _LR) + reward * _LR))
         mem[codon] = new
 
-    # Store simple ± feedback in codon_memory
-    feedback_tag = "positive" if reward > 0 else "negative" if reward < 0 else None
-    if feedback_tag:
-        record_codon_feedback(agent, codons, score=reward, feedback=feedback_tag)
 
-def get_weight(agent: str, codon: str) -> float:
+def get_weight(agent: str, codon: str, *, memory=None) -> float:
     """Return in‑memory weight or fall back to codon_memory disk value."""
+    if memory is not None:
+        return memory.get_codon_weights(agent).get(codon, 1.0)
     if codon in _weights.get(agent, {}):
         return _weights[agent][codon]
-    return get_codon_weight(agent, codon)
+    return 1.0
 
 def decay_all() -> None:
     for mem in _weights.values():

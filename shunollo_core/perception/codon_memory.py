@@ -49,14 +49,12 @@ _weight_cache = {}
 _cache_lock = threading.RLock()
 
 def get_codon_weight(agent: str, codon: str, memory: AbstractMemory) -> float:
-    """Calculates weight dynamically from DB feedback (with caching)."""
-    with _cache_lock:
-        # Lazy load weights for this agent if not in cache
-        if agent not in _weight_cache:
-            print(f"[Memory] Cold start: Fetching weights for {agent} from DB...")
-            _weight_cache[agent] = memory.get_codon_weights(agent)
-            
-        return _weight_cache[agent].get(codon, 1.0)
+    """Read host-owned weights without sharing cached state across adapters.
+
+    Hosts may cache within their own adapter, with their own invalidation policy.
+    An agent name alone is not a safe cross-host cache key.
+    """
+    return memory.get_codon_weights(agent).get(codon, 1.0)
 
 def record_codon_feedback(
     agent: str,
