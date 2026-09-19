@@ -22,6 +22,15 @@ def main():
             assert len(rows) == 2
             assert len(rows[0]["payload"]["vector"]) == 18
             assert rows[1]["payload"] == {"ticket_id": "example"}
+    from unittest.mock import Mock
+    from shunollo_core.memory.base import AbstractMemory
+    from shunollo_core.feedback.audit_log import write_audit_log, get_recent_audit_logs
+    host = Mock(spec=AbstractMemory)
+    host.get_audit_logs.return_value = [{"action": "installed"}]
+    write_audit_log("installed", "host-owned", memory=host)
+    host.log_audit.assert_called_once_with("installed", "host-owned")
+    assert get_recent_audit_logs(memory=host) == [{"action": "installed"}]
+    host.get_audit_logs.assert_called_once_with(limit=100)
     from shunollo_core.perception.meta_gene_layer import TraitMemory, summary
     assert summary("new-host")["top_traits"] == []
     first, second = TraitMemory(), TraitMemory()

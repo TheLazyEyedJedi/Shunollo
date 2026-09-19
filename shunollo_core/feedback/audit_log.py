@@ -1,17 +1,15 @@
-# shunollo_core/feedback/audit_log.py
+"""Audit helpers backed by an explicitly supplied host memory adapter."""
 
-import os, time
-from datetime import datetime
-from shunollo_core.storage.database import write_audit_log_db, get_audit_logs_db
+from typing import Any, Dict, List
 
-def write_audit_log(action: str, details: str):
-    """
-    Write an audit log entry to the database.
-    """
-    write_audit_log_db(action, details)
+from shunollo_core.memory.base import AbstractMemory
 
-def get_recent_audit_logs(limit: int = 100):
-    """
-    Retrieve the most recent audit log entries from the database.
-    """
-    return get_audit_logs_db(limit=limit)
+
+def write_audit_log(action: str, details: str, *, memory: AbstractMemory) -> None:
+    """Delegate persistence to the host; storage failures propagate to the caller."""
+    memory.log_audit(action, details)
+
+
+def get_recent_audit_logs(limit: int = 100, *, memory: AbstractMemory) -> List[Dict[str, Any]]:
+    """Return host audit records without changing their ordering or schema."""
+    return memory.get_audit_logs(limit=limit)

@@ -3,18 +3,16 @@
 [![PyPI version](https://img.shields.io/pypi/v/shunollo.svg)](https://pypi.org/project/shunollo/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![CI](https://github.com/TheLazyEyedJedi/Shunollo/actions/workflows/ci.yml/badge.svg)](https://github.com/TheLazyEyedJedi/Shunollo/actions/workflows/ci.yml)
-[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 
 **A Universal Physics Engine for Cognitive Architectures**
 
 Shunollo provides a pure, agnostic physics layer for translating any data stream into sensory qualia - enabling AI systems to "feel" their environment through entropy, roughness, viscosity, and other universal metrics.
 
 > [!IMPORTANT]
-> **Status**: Production Ready (v0.3.9)
-> *   **Physics**: Modular (Thermodynamics, Quantum, Optics, Mechanics)
-> *   **Integrity**: 228 Tests (Unit, Integration, Functional, Performance)
-> *   **Performance**: Sub-millisecond latency (<0.1ms)
-> *   **Safety**: Verified (Refractory Period, Thermal Limits)
+> **Release baseline**: 0.3.12. See [release notes](docs/RELEASE_0.3.12.md) for verified behavior and limitations.
+> Test counts and historical performance measurements do not establish production readiness or detection accuracy.
+> The [host audit-log repair](docs/HOST_AUDIT_LOG.md) requires an explicit memory adapter and is not yet published.
 
 ## 100% Open Source
 
