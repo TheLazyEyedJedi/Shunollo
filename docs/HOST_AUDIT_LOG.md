@@ -14,4 +14,4 @@ Writes call `memory.log_audit`; reads call `memory.get_audit_logs`. The host own
 
 Previously this module failed to import because it referenced removed `shunollo_core.storage.database`. Callers must now supply `memory=` explicitly; there is no silent fallback to historical storage. This is separate from optional `shunollo_runtime.audit.SQLiteAuditMiddleware`, which records transport observations.
 
-This repair is unreleased. Omnisthesia remains pinned to published 0.3.12 until a separate engine release and tested consumer upgrade. No database migration or package version change is included.
+This repair is included in 0.3.13. Omnisthesia remains pinned to published 0.3.12 until a separate engine release and tested consumer upgrade. No database migration is required.

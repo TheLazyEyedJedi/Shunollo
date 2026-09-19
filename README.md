@@ -10,9 +10,9 @@
 Shunollo provides a pure, agnostic physics layer for translating any data stream into sensory qualia - enabling AI systems to "feel" their environment through entropy, roughness, viscosity, and other universal metrics.
 
 > [!IMPORTANT]
-> **Release baseline**: 0.3.12. See [release notes](docs/RELEASE_0.3.12.md) for verified behavior and limitations.
+> **Release baseline**: 0.3.13. See [release notes](docs/RELEASE_0.3.13.md) for verified behavior and limitations.
 > Test counts and historical performance measurements do not establish production readiness or detection accuracy.
-> The [host audit-log repair](docs/HOST_AUDIT_LOG.md) requires an explicit memory adapter and is not yet published.
+> The [host audit-log repair](docs/HOST_AUDIT_LOG.md) requires an explicit memory adapter and is included in 0.3.13.
 
 ## 100% Open Source
 
