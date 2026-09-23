@@ -12,6 +12,7 @@ Generic symbolic memory repairs and an optional count-preserving image channel.
   counts in a one-row 16-bit PNG, with strict range and size bounds. The mapping
   is `count-image-u16-v1`. Callers retain time units, coverage and source identity.
 - Dependency metadata now correctly requires Pydantic 2.
+- Source and wheel distributions exclude packet captures and database artifacts.
 
 Migration: `apply_feedback` requires explicit `traits` and `memory` arguments;
 `percept_genome.update_weights` requires `memory`. These repair previously broken

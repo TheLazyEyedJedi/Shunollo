@@ -46,3 +46,6 @@ dev = [
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["shunollo_core*", "shunollo_runtime*"]
+
+[tool.setuptools.exclude-package-data]
+"*" = ["*.pcap", "*.pcapng", "*.cap", "*.sqlite", "*.sqlite3", "*.db"]
