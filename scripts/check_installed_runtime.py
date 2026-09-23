@@ -12,6 +12,11 @@ def main():
     source_root = Path(__file__).resolve().parents[1]
     installed_path = Path(shunollo_runtime.__file__).resolve()
     assert source_root not in installed_path.parents, installed_path
+    import shunollo_core
+    from shunollo_core.perception.count_image import encode_counts, decode_counts
+    assert decode_counts(encode_counts([0, 1, 256, 65535]), expected_bins=4) == [0, 1, 256, 65535]
+    forbidden = {'.pcap', '.pcapng', '.cap', '.sqlite', '.sqlite3', '.db'}
+    assert not [p for p in Path(shunollo_core.__file__).parent.rglob('*') if p.suffix in forbidden]
     with tempfile.TemporaryDirectory() as directory:
         path = Path(directory) / "audit.sqlite"
         with SQLiteAuditMiddleware(path) as audit:
