@@ -121,6 +121,30 @@ class VestibularDynamics:
         if len(self._history) > 100: self._history = self._history[-100:]
         return self._velocity
     
+    def integrate_elapsed(self, acceleration: float, *, dt: float) -> float:
+        """Smooth a piecewise-constant input over elapsed seconds.
+
+        Optional time-aware mode: ``time_constant`` is the e-folding time in
+        seconds. The legacy ``integrate_acceleration`` method remains per-call
+        and continues to use ``damping`` unchanged. Do not mix modes in a stream.
+        A host owns timestamps, coverage gaps, session boundaries and reset policy.
+        This is exponential smoothing, not physical acceleration integration.
+        """
+        values = (acceleration, dt, self.time_constant)
+        if any(isinstance(v, bool) or not isinstance(v, (int, float)) or not math.isfinite(v) for v in values):
+            raise ValueError('Input, elapsed time and time constant must be finite numbers')
+        if dt <= 0 or self.time_constant <= 0:
+            raise ValueError('Elapsed time and time constant must be positive')
+        weight = -math.expm1(-dt / self.time_constant)
+        value = (1.0 - weight) * self._velocity + weight * acceleration
+        if not math.isfinite(value):
+            raise ValueError('Smoothing result must be finite')
+        self._velocity = value
+        self._history.append(value)
+        if len(self._history) > 100:
+            self._history = self._history[-100:]
+        return value
+
     def get_cumulative_displacement(self) -> float:
         if not self._history: return 0.0
         return sum(self._history) / len(self._history)
