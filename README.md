@@ -43,7 +43,7 @@ signal = ShunolloSignal(energy=5.0, roughness=0.8, entropy=6.5)
 hippo.remember(signal)
 
 # Later: Déjà Vu - "Have I felt this before?"
-query_vector = new_signal.to_vector(normalize=True)
+query_vector = signal.to_vector(normalize=True)
 similar_episodes = hippo.recall_similar(query_vector, k=3)
 
 if similar_episodes:
@@ -51,7 +51,7 @@ if similar_episodes:
     print(f"Déjà Vu! This feels like {past_signal.timestamp} (distance: {distance})")
 ```
 
-**Why it matters**: Enables One-Shot Learning. Detect an anomaly once, store the sensory signature, recognize it instantly on reoccurrence.
+Nearest-neighbor retrieval returns stored examples for interpretation by the host. Recognition quality depends on the mapping, reference set and evaluation task.
 
 ## Architecture
 
@@ -91,33 +91,19 @@ graph LR
 pip install shunollo
 ```
 
-## Quick Start
+## Quick start for 0.3.14
+
+Round-trip a short count series through the versioned image mapping.
 
 ```python
-# Pure physics calculation
-from shunollo_core.physics.mechanics import calculate_entropy, calculate_roughness
-entropy = calculate_entropy(data)
-roughness = calculate_roughness(entropy, jitter=0.1)
+from shunollo_core.perception.count_image import decode_counts, encode_counts
 
-# Create a sensory signal
-signal = ShunolloSignal(
-    energy=1.5,
-    entropy=entropy,
-    roughness=roughness,
-)
-
-# Get 13-dimensional sensory vector
-vector = vectorize_sensation(signal.to_dict())
-
-# Store in episodic memory
-hippo = Hippocampus()
-hippo.remember(signal)
-
-# Check novelty: "How new is this sensation?"
-novelty = hippo.get_novelty_score(signal.to_vector())
-if novelty > 1.0:
-    print("Novel pattern detected!")
+counts = [0, 2, 2, 5]
+encoded = encode_counts(counts)
+assert decode_counts(encoded, expected_bins=len(counts)) == counts
 ```
+
+The encoder accepts 1–6,000 integer bins, each from 0 through 65,535. The calling application supplies the bin duration, coverage and source identity. A zero alone cannot distinguish silence from missing observations.
 
 ## License
 
